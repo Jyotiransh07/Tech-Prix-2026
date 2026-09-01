@@ -28,29 +28,51 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
   const [loadProgress, setLoadProgress] = useState(0);
   const imagesRef = useRef<HTMLImageElement[]>([]);
 
-  // Preload images sequentially to prevent scrolling into unloaded frames (which causes it to get "stuck")
+  // Progressive preload: first batch (frames 1-30) loads immediately for fast first paint,
+  // then the rest loads in the background without blocking.
   useEffect(() => {
     let loadedCount = 0;
-    const imgs: HTMLImageElement[] = [];
-    
-    for (let i = 1; i <= TOTAL_FRAMES; i++) {
+    const imgs: HTMLImageElement[] = new Array(TOTAL_FRAMES);
+    const FIRST_BATCH = 30; // Show hero fast
+
+    const loadFrame = (i: number) => {
       const img = new Image();
       img.src = `${FOLDER_PATH}frame_${String(i).padStart(4, "0")}.png`;
-      
+      imgs[i - 1] = img;
+
       const checkDone = () => {
         loadedCount++;
         setLoadProgress(Math.floor((loadedCount / TOTAL_FRAMES) * 100));
         if (loadedCount === TOTAL_FRAMES) {
           setIsLoaded(true);
         }
+        // Mark as loaded after first batch so canvas can render
+        if (loadedCount === FIRST_BATCH) {
+          imagesRef.current = imgs;
+          setIsLoaded(true);
+        }
       };
-      
+
       img.onload = checkDone;
       img.onerror = checkDone;
-      imgs.push(img);
+    };
+
+    // Load first batch synchronously
+    for (let i = 1; i <= FIRST_BATCH; i++) {
+      loadFrame(i);
     }
+
+    // Load the rest after a small delay (non-blocking)
+    const timer = setTimeout(() => {
+      for (let i = FIRST_BATCH + 1; i <= TOTAL_FRAMES; i++) {
+        loadFrame(i);
+      }
+    }, 200);
+
     imagesRef.current = imgs;
+    return () => clearTimeout(timer);
   }, [TOTAL_FRAMES]);
+
 
   useEffect(() => {
     if (!isLoaded || !canvasRef.current) return;

@@ -32,7 +32,7 @@ export default function Home() {
       <CircuitTimeline />
       <RulesAndGuidelines />
       <FAQ />
-      <Footer />
+      <Footer onOpenModal={(mode) => setModalMode(mode as "squad" | "duo")} />
 
       {modalMode && (
         <RegistrationModal mode={modalMode} onClose={() => setModalMode(null)} />

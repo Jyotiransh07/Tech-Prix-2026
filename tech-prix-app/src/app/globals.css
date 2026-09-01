@@ -542,7 +542,53 @@ body {
 .preloader { display: none; } /* Removed to let the fast video load seamlessly */
 
 /* Footer */
-.paddock-footer { padding: 48px 0; border-top: 1px solid var(--border-subtle); text-align: center; color: var(--text-muted); font-size: 0.875rem; }
+.paddock-footer { border-top: 1px solid var(--border-subtle); }
+.footer-cta-block {
+  padding: 72px 0 60px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.footer-cta-headline {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+.footer-cta-sub {
+  font-size: 1rem;
+  color: var(--text-silver);
+  margin-bottom: 8px;
+}
+.footer-register-btn {
+  padding: 14px 40px;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+}
+.footer-divider {
+  border-top: 1px solid var(--border-subtle);
+}
+.footer-bottom-bar {
+  padding: 24px 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .footer-cta-block {
+    padding: 48px 0 40px;
+    gap: 12px;
+  }
+  .footer-register-btn {
+    padding: 13px 32px;
+    font-size: 0.9rem;
+    width: 100%;
+    max-width: 320px;
+  }
+}
 
 /* Modals */
 .modal-backdrop-wrap { display: none; }
@@ -981,5 +1027,497 @@ nextjs-portal,
   }
   .center-img-wrapper {
     height: 400px;
+  }
+}
+
+/* ==========================================================================
+   HAMBURGER BUTTON & MOBILE NAV DRAWER
+   ========================================================================== */
+
+.hamburger-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0;
+  padding: 0;
+}
+.hamburger-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+/* Overlay behind the drawer */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 998;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.mobile-nav-overlay.open {
+  opacity: 1;
+}
+
+/* Slide-in Drawer */
+.mobile-nav-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(320px, 85vw);
+  height: 100dvh;
+  background: rgba(8, 8, 8, 0.97);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 999;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+.mobile-nav-drawer.open {
+  transform: translateX(0);
+}
+.mobile-nav-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 96px 32px 48px;
+  gap: 32px;
+}
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+.mobile-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 0;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: padding-left 0.2s ease;
+}
+.mobile-nav-item:hover,
+.mobile-nav-item:active {
+  padding-left: 8px;
+}
+.mobile-nav-num {
+  font-size: 0.75rem;
+  color: rgba(225, 6, 0, 0.8);
+  font-weight: 700;
+  letter-spacing: 2px;
+  min-width: 28px;
+}
+.mobile-nav-label {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+.mobile-nav-footer {
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVE — GLOBAL
+   ========================================================================== */
+
+/* Disable fixed background (causes major jank on mobile) */
+@media (max-width: 768px) {
+  .content-section {
+    background-attachment: scroll !important;
+  }
+  .podium-showcase-new {
+    background-attachment: scroll !important;
+  }
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVE — 1024px (tablets)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .header-inner {
+    padding: 16px 24px;
+  }
+  .nav-menu.desktop-nav {
+    display: none;
+  }
+  .hamburger-btn {
+    display: flex;
+  }
+  .mobile-nav-overlay {
+    display: block;
+  }
+  /* Show audio button on tablet+ but keep compact */
+  .telemetry-btn {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVE — 768px (large phones)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Header */
+  .header-inner {
+    padding: 14px 16px;
+  }
+  .brand-title {
+    font-size: 1.1rem;
+  }
+  .brand-sub {
+    font-size: 0.75rem;
+  }
+  .brand-logo-mark {
+    width: 36px;
+    height: 36px;
+  }
+  .cta-glory {
+    padding: 10px 18px;
+    font-size: 0.8rem;
+  }
+
+  /* Hero Canvas Track — shorten scroll distance on mobile */
+  .hero-canvas-track {
+    height: 350vh;
+  }
+
+  /* Hero HUD — simplify for mobile */
+  .telemetry-hud-overlay {
+    padding: 80px 16px 20px 16px;
+  }
+  .hud-row-bottom {
+    display: none; /* Hide telemetry bars on mobile */
+  }
+  .hud-center-stage {
+    max-width: 100%;
+  }
+  .story-slide {
+    width: calc(100% - 0px);
+    padding: 0 4px;
+  }
+  .hero-headline {
+    font-size: clamp(2rem, 9vw, 3.5rem);
+  }
+  .hero-description {
+    font-size: 0.95rem;
+    margin-top: 16px;
+  }
+  .classification-tag {
+    font-size: 0.75rem;
+  }
+  .event-timing-badge {
+    font-size: 0.7rem;
+    padding: 5px 10px;
+  }
+  .hero-action-bar {
+    margin-top: 24px;
+  }
+
+  /* Content Sections */
+  .content-section {
+    padding: 80px 0;
+  }
+  .f1-container {
+    padding: 0 16px;
+  }
+  .section-header-block {
+    margin-bottom: 40px;
+  }
+  .section-title-large {
+    font-size: clamp(1.6rem, 8vw, 2.5rem);
+    transform: skewX(-3deg);
+  }
+  .section-summary {
+    font-size: 1rem;
+    margin-top: 16px;
+  }
+
+  /* About section */
+  .about-section-new {
+    padding-top: 60px;
+    padding-bottom: 20px;
+  }
+  .about-main-title {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+  .about-stats-bar {
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 40px;
+  }
+  .stat-item {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    padding: 14px 12px;
+  }
+  .stat-item:nth-child(odd) {
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .stat-item:last-child,
+  .stat-item:nth-last-child(2):nth-child(odd) {
+    border-bottom: none;
+  }
+  .about-content-split {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .about-text-col {
+    font-size: 1rem;
+    gap: 16px;
+  }
+  .about-countdown {
+    grid-template-columns: 1fr 1fr;
+    margin-top: 20px;
+  }
+  .countdown-label {
+    grid-column: 1 / -1;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px;
+    font-size: 0.85rem;
+  }
+  .countdown-unit {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.8rem;
+    padding: 12px 8px;
+  }
+  .countdown-unit:nth-child(odd) {
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .countdown-unit:last-child,
+  .countdown-unit:nth-last-child(2):nth-child(odd) {
+    border-bottom: none;
+  }
+  .countdown-unit span {
+    font-size: 1.2rem;
+  }
+
+  /* Disciplines / tracks */
+  .disciplines-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Podium / Rewards */
+  .podium-showcase-new {
+    padding-top: 60px;
+    padding-bottom: 80px;
+  }
+  .rewards-hero-layout {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+  .reward-side-card {
+    max-width: 100%;
+    padding: 32px 16px;
+  }
+  .reward-center-focus {
+    max-width: 100%;
+    margin: 0;
+  }
+  .center-img-wrapper {
+    height: 280px;
+    margin-bottom: -60px;
+  }
+  .champ-hero-img {
+    max-width: 240px;
+  }
+  .reward-plaque {
+    padding: 32px 16px;
+    clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
+  }
+  .plaque-rank { font-size: 3rem; }
+  .plaque-title { font-size: 1.1rem; letter-spacing: 2px; }
+  .plaque-prize-val { font-size: 3rem; }
+  .rc-rank { font-size: 2.5rem; }
+  .rc-prize-val { font-size: 2.5rem; }
+  .rc-footer-graphic {
+    height: 100px;
+    margin-bottom: -32px;
+  }
+
+  /* Timeline / Schedule */
+  .race-timeline-track {
+    padding-left: 24px;
+  }
+  .checkpoint-node {
+    left: -30px;
+  }
+  .checkpoint-card {
+    padding: 16px;
+  }
+  .timeline-checkpoint {
+    margin-bottom: 32px;
+  }
+
+  /* Rules */
+  .rules-container {
+    padding: 24px 16px;
+  }
+  .tire-bullet-item {
+    font-size: 0.95rem;
+    padding: 12px 12px;
+    gap: 12px;
+  }
+
+  /* FAQ */
+  .faq-trigger {
+    font-size: 1rem;
+  }
+  .faq-block {
+    padding: 16px;
+  }
+
+  /* Modal */
+  .modal-card-dialog {
+    max-width: calc(100vw - 32px);
+    margin: 16px;
+  }
+
+  /* Metrics / passes grids */
+  .metrics-grid, .passes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Footer */
+  .paddock-footer {
+    padding: 32px 16px;
+    font-size: 0.8rem;
+  }
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVE — 480px (small phones)
+   ========================================================================== */
+@media (max-width: 480px) {
+  .header-inner {
+    padding: 12px 14px;
+  }
+  .brand-sub {
+    display: none; /* Hide sub-label on very small screens */
+  }
+  .cta-glory {
+    padding: 9px 14px;
+    font-size: 0.75rem;
+  }
+  .hamburger-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Hero */
+  .hero-canvas-track {
+    height: 300vh;
+  }
+  .telemetry-hud-overlay {
+    padding: 70px 12px 16px 12px;
+  }
+  .hero-headline {
+    font-size: clamp(1.75rem, 10vw, 2.8rem);
+  }
+  .hero-description {
+    font-size: 0.875rem;
+  }
+  .event-timing-badge {
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+  }
+
+  /* Content */
+  .content-section {
+    padding: 60px 0;
+  }
+  .section-title-large {
+    font-size: clamp(1.4rem, 9vw, 2rem);
+  }
+  .about-stats-bar {
+    grid-template-columns: 1fr;
+  }
+  .stat-item {
+    border-right: none !important;
+  }
+  .stat-item:last-child {
+    border-bottom: none;
+  }
+
+  /* Countdown — single column */
+  .about-countdown {
+    grid-template-columns: 1fr;
+  }
+  .countdown-unit {
+    border-right: none !important;
+  }
+  .countdown-unit:last-child {
+    border-bottom: none;
+  }
+
+  /* Podium */
+  .center-img-wrapper {
+    height: 220px;
+    margin-bottom: -50px;
+  }
+  .plaque-rank { font-size: 2.5rem; }
+  .plaque-prize-val { font-size: 2.5rem; }
+
+  /* Timeline */
+  .race-timeline-track {
+    padding-left: 20px;
+  }
+  .checkpoint-node {
+    left: -26px;
+    width: 10px;
+    height: 10px;
+  }
+
+  /* Mobile drawer */
+  .mobile-nav-inner {
+    padding: 80px 24px 40px;
+  }
+  .mobile-nav-label {
+    font-size: 1.2rem;
+  }
+}
+
+/* ==========================================================================
+   PERFORMANCE: Reduce motion for users who prefer it
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .p1-pillar {
+    animation: none;
+    transform: scale(1.05);
+  }
+  .champ-cash {
+    animation: none;
+  }
+  .text-glitch::before,
+  .text-glitch::after {
+    animation: none;
+    opacity: 0;
+  }
+  .timing-dot {
+    animation: none;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
   }
 }
