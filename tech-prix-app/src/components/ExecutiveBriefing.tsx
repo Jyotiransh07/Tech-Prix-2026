@@ -55,6 +55,8 @@ export default function ExecutiveBriefing() {
               src="/mercedes-f1.png" 
               alt="Tech Prix Mercedes F1" 
               className="about-f1-img mercedes-glow"
+              loading="lazy"
+              decoding="async"
             />
           </div>
           

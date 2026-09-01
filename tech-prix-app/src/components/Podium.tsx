@@ -20,7 +20,7 @@ export default function Podium() {
               </div>
               <p className="rc-cert">+ Certificate</p>
               <div className="rc-footer-graphic">
-                <img src="/checkered-flag-cross.png" alt="Checkered Flags" className="rc-f1-img" />
+                <img src="/checkered-flag-cross.png" alt="Checkered Flags" className="rc-f1-img" loading="lazy" decoding="async" />
               </div>
             </div>
           </div>
@@ -32,6 +32,8 @@ export default function Podium() {
                 src="/max-fix.png" 
                 alt="Tech Prix Champion" 
                 className="champ-hero-img"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div className="reward-plaque p1-plaque">
@@ -53,7 +55,7 @@ export default function Podium() {
               </div>
               <p className="rc-cert">+ Certificate</p>
               <div className="rc-footer-graphic">
-                <img src="/checkered-flag-cross.png" alt="Checkered Flags" className="rc-f1-img" />
+                <img src="/checkered-flag-cross.png" alt="Checkered Flags" className="rc-f1-img" loading="lazy" decoding="async" />
               </div>
             </div>
           </div>
