@@ -10,7 +10,7 @@ export default function PaddockPasses({ onOpenModal }: { onOpenModal: (mode: str
           <div className="pass-box featured-pass-box spotlight-card" style={{ maxWidth: '400px', width: '100%' }}>
             <div className="pass-tier-header">
               <span className="tier-code text-red">PASS TIER // ENTRY PASS</span>
-              <div className="tier-cost text-white">₹300</div>
+              <div className="tier-cost text-white">₹150</div>
             </div>
             <button className="cta-glory" onClick={() => onOpenModal('register')}>REGISTER NOW</button>
           </div>

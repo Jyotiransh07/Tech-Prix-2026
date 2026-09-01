@@ -37,7 +37,7 @@ export default function FAQ() {
             {q: 'Who can participate?', a: 'The hackathon is open to all college students, hardware enthusiasts, and developers of all skill levels.'},
             {q: 'Do I need to bring my own hardware and tools?', a: 'Yes. No tools or equipment will be provided at the venue. You must bring all your own components, microcontrollers, and soldering/fabrication equipment. However, you are permitted to do some of the work prior to the event and bring it with you.'},
             {q: 'What is the team size limit?', a: 'Teams can have a minimum of 2 and a maximum of 4 members.'},
-            {q: 'Is there a registration fee?', a: 'Yes, the team entry fee is ₹300. This covers food, beverages, and entry passes for all team members.'},
+            {q: 'Is there a registration fee?', a: 'Yes, the team entry fee is ₹150. This covers food, beverages, and entry passes for all team members.'},
             {q: 'Will internet be provided?', a: 'Yes, high-speed Wi-Fi will be available at the venue throughout the entire 8-hour sprint.'},
             {q: 'Can we build software-only projects?', a: 'No, this is a hardware-focused event. Your project must include a physical hardware component integrated with software.'}
           ].map((item, i) => (

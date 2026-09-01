@@ -19,31 +19,43 @@ export default function RulesAndGuidelines() {
               <li className="tire-bullet-item">
                 <span className="tire-icon"></span>
                 <div>
-                  <strong>Bring Your Own Gear & Prior Work:</strong> No tools or equipment will be provided at the venue. You must bring all your own materials. However, you are permitted to do some of the work prior to the event and bring it on the day.
+                  <strong>Time Limit:</strong> 6-hour hackathon. All projects must be finished and submitted within this window.
                 </div>
               </li>
               <li className="tire-bullet-item">
                 <span className="tire-icon"></span>
                 <div>
-                  <strong>Power Limits:</strong> High-voltage components exceeding 24V DC or 110V AC require explicit safety sign-off from the Event Mentors prior to testing.
+                  <strong>BYO Gear:</strong> Teams must bring their own laptops, components, sensors, boards, and tools.
                 </div>
               </li>
               <li className="tire-bullet-item">
                 <span className="tire-icon"></span>
                 <div>
-                  <strong>Component Inspection:</strong> All components, including partially assembled pre-work, must be declared and inspected at the start of the event to ensure fairness and safety.
+                  <strong>Prior Work:</strong> Pre-existing code or hardware is allowed but must be declared. A substantial new feature must be added during the event.
                 </div>
               </li>
               <li className="tire-bullet-item">
                 <span className="tire-icon"></span>
                 <div>
-                  <strong>Workspace Safety:</strong> Soldering irons and heat guns must only be used in designated fire-safe workspaces. Proper eye protection is mandatory during fabrication.
+                  <strong>Tech & AI:</strong> APIs, open-source resources, and AI (ChatGPT, Gemini) are allowed, but you must fully understand and be able to explain your work.
                 </div>
               </li>
               <li className="tire-bullet-item">
                 <span className="tire-icon"></span>
                 <div>
-                  <strong>Open-Source Code:</strong> Any software used to control your hardware must be pushed to a public repository for the judges to verify.
+                  <strong>Safety First:</strong> Adhere strictly to all electrical, fabrication, and venue safety rules. Unsafe practices will be restricted.
+                </div>
+              </li>
+              <li className="tire-bullet-item">
+                <span className="tire-icon"></span>
+                <div>
+                  <strong>Demo:</strong> Submit required documentation on time and demonstrate a working solution to the judges.
+                </div>
+              </li>
+              <li className="tire-bullet-item">
+                <span className="tire-icon"></span>
+                <div>
+                  <strong>Conduct:</strong> No plagiarism or misconduct. Organizer instructions are final, and violations will lead to disqualification.
                 </div>
               </li>
             </ul>

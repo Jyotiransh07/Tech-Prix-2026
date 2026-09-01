@@ -4,7 +4,7 @@ export const CONFIG = {
   EVENT_DATE: "9 SEPTEMBER 2026",
   ORGANIZERS: "SPACE × ORBYTE",
   
-  TEAM_ENTRY_FEE: "₹300",
+  TEAM_ENTRY_FEE: "₹150",
   TEAM_SIZE: "UP TO 4 MEMBERS",
   
   // Duo option removed per request

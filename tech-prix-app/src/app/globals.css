@@ -397,9 +397,10 @@ body {
   padding: 120px 0;
   background-color: var(--bg-pure);
   background-image: 
-    linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 40px 40px;
+  background-attachment: fixed;
   position: relative;
 }
 .section-header-block {
@@ -634,8 +635,10 @@ body {
 .race-regulations { margin-bottom: 60px; }
 .rules-container { padding: 40px; margin-top: 24px; }
 .tire-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 20px; }
-.tire-bullet-item { display: flex; align-items: flex-start; gap: 16px; font-size: 1.05rem; color: var(--text-silver); line-height: 1.6; }
-.tire-bullet-item strong { color: #FFFFFF; margin-right: 6px; }
+.tire-bullet-item { display: flex; align-items: flex-start; gap: 16px; font-size: 1.05rem; color: var(--text-silver); line-height: 1.6; padding: 16px 20px; border-left: 4px solid transparent; transition: all 0.3s ease; border-radius: 4px; }
+.tire-bullet-item:hover { border-left-color: #E10600; background: linear-gradient(90deg, rgba(225,6,0,0.15) 0%, transparent 100%); transform: translateX(8px); box-shadow: -10px 0 20px -10px rgba(225, 6, 0, 0.5); }
+.tire-bullet-item strong { color: #FFFFFF; margin-right: 6px; transition: color 0.3s ease; }
+.tire-bullet-item:hover strong { color: #E10600; }
 .tire-icon {
   width: 24px;
   height: 24px;
@@ -713,8 +716,8 @@ nextjs-portal,
 }
 .about-text-col {
   color: #ccc;
-  font-size: 1.05rem;
-  line-height: 1.7;
+  font-size: 1.1rem;
+  line-height: 1.75;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -796,7 +799,13 @@ nextjs-portal,
    ========================================================================== */
 .podium-showcase-new {
   position: relative;
-  background: radial-gradient(circle at center, rgba(225, 6, 0, 0.1) 0%, transparent 70%);
+  background-image: 
+    radial-gradient(circle at center, rgba(225, 6, 0, 0.1) 0%, transparent 70%),
+    linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+  background-repeat: no-repeat, repeat, repeat;
+  background-attachment: scroll, fixed, fixed;
   padding-top: 40px; /* Reduced to bring it closer to the section above */
   padding-bottom: 150px;
 }
