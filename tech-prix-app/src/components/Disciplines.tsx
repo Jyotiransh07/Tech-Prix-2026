@@ -57,7 +57,13 @@ export default function Disciplines() {
 
         </div>
 
-        <div style={{ marginTop: '48px', textAlign: 'center' }}>
+        <div style={{ marginTop: '48px', marginBottom: '32px', textAlign: 'center', padding: '0 20px' }}>
+          <p style={{ color: 'var(--text-silver)', fontSize: '1.05rem', lineHeight: '1.6', maxWidth: '700px', margin: '0 auto' }}>
+            <strong style={{ color: '#E10600', letterSpacing: '1px' }}>OPEN INNOVATION:</strong> In addition to the predefined domains, we highly encourage out-of-the-box thinking. Any unique and innovative hardware implementations outside these problem statements are also welcomed and considered!
+          </p>
+        </div>
+
+        <div style={{ textAlign: 'center' }}>
           <a href="/Tech_Prix_Problem_Statement.pdf" download className="cta-glory" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
             <Download size={18} />
             DOWNLOAD DETAILED PROBLEM STATEMENT
