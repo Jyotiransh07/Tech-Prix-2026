@@ -74,7 +74,7 @@ export default function ExecutiveBriefing() {
 
             {/* Countdown */}
             {/* Countdown */}
-            <div className="mt-10 p-4 sm:p-6 bg-black/10 rounded-xl backdrop-blur-xl shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col items-center w-full max-w-xl mx-auto">
+            <div className="mt-10 p-4 sm:p-6 bg-black/10 rounded-xl backdrop-blur-xl shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col items-center w-full max-w-xl mx-auto mobile-countdown-gap">
               {/* Transparent Header */}
               <div className="bg-transparent text-white w-full text-center">
                 <h3 className="text-base sm:text-xl font-black tracking-[0.3em] uppercase m-0 drop-shadow-lg">Registrations Closing In</h3>
