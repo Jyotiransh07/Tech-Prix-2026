@@ -23,7 +23,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
   const sec3Ref = useRef<HTMLDivElement>(null);
   const frameCounterRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
-  
+
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadProgress, setLoadProgress] = useState(0);
   const imagesRef = useRef<HTMLImageElement[]>([]);
@@ -32,11 +32,11 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
   useEffect(() => {
     let loadedCount = 0;
     const imgs: HTMLImageElement[] = [];
-    
+
     for (let i = 1; i <= TOTAL_FRAMES; i++) {
       const img = new Image();
       img.src = `${FOLDER_PATH}frame_${String(i).padStart(4, "0")}.png`;
-      
+
       const checkDone = () => {
         loadedCount++;
         setLoadProgress(Math.floor((loadedCount / TOTAL_FRAMES) * 100));
@@ -44,7 +44,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
           setIsLoaded(true);
         }
       };
-      
+
       img.onload = checkDone;
       img.onerror = checkDone;
       imgs.push(img);
@@ -60,7 +60,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
     const images = imagesRef.current;
 
     let dpr = Math.min(window.devicePixelRatio || 1, 2);
-    
+
     const renderFrame = (frameNum: number) => {
       const frameIdx = Math.max(1, Math.min(TOTAL_FRAMES, Math.round(frameNum))) - 1;
       const img = images[frameIdx];
@@ -119,7 +119,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
       scrub: 1.5, // Increased for smoother scroll easing
       onUpdate: (self) => {
         const p = self.progress;
-        
+
         // Update direct DOM refs to avoid 60fps React re-renders
         if (speedRef.current) speedRef.current.innerText = String(Math.floor(p * 308)).padStart(3, '0');
         if (throttleRef.current) throttleRef.current.style.width = `${p * 100}%`;
@@ -130,10 +130,10 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
         if (sec1Ref.current) sec1Ref.current.className = `sec-flag ${p >= 0 ? 'active' : ''}`;
         if (sec2Ref.current) sec2Ref.current.className = `sec-flag ${p > 0.33 ? 'active' : ''}`;
         if (sec3Ref.current) sec3Ref.current.className = `sec-flag ${p > 0.66 ? 'active' : ''}`;
-        
+
         // Update Canvas only if the frame changes (fixes extreme lag)
         const targetFrame = Math.max(1, Math.min(TOTAL_FRAMES, Math.floor(p * (TOTAL_FRAMES - 1)) + 1));
-        
+
         if (frameRef.current.frame !== targetFrame) {
           frameRef.current.frame = targetFrame;
           if (frameCounterRef.current) {
@@ -143,10 +143,9 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
         }
 
         // Slide transitions (React state is fine here since it bails out if value is same)
-        if (p < 0.25) setActiveSlide(0);
-        else if (p < 0.55) setActiveSlide(1);
-        else if (p < 0.80) setActiveSlide(2);
-        else setActiveSlide(3);
+        if (p < 0.33) setActiveSlide(0);
+        else if (p < 0.66) setActiveSlide(1);
+        else setActiveSlide(2);
       }
     });
 
@@ -184,7 +183,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
             <div className={`story-slide ${activeSlide === 1 ? "active" : ""}`}>
               <span className="classification-tag">HACKATHON TRACKS</span>
               <h2 className="hero-headline">
-                HARDWARE CORE<br/>× SOFTWARE LOGIC
+                HARDWARE CORE<br />× SOFTWARE LOGIC
               </h2>
               <p className="hero-description">
                 Whether you're designing custom circuits, programming microcontrollers, or building software to control physical devices — choose your track.
@@ -192,19 +191,9 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
             </div>
 
             <div className={`story-slide ${activeSlide === 2 ? "active" : ""}`}>
-              <span className="classification-tag">PRIZE POOL</span>
-              <h2 className="hero-headline">
-                {CONFIG.TOTAL_PRIZE}+<br/>CASH PRIZE POOL
-              </h2>
-              <p className="hero-description">
-                1st Place: {CONFIG.FIRST_PRIZE} • 2nd Place: {CONFIG.SECOND_PRIZE} • 3rd Place: {CONFIG.THIRD_PRIZE}
-              </p>
-            </div>
-
-            <div className={`story-slide ${activeSlide === 3 ? "active" : ""}`}>
               <span className="classification-tag">REGISTRATION</span>
               <h2 className="hero-headline">
-                {CONFIG.EVENT_DATE}<br/>LOCK IN YOUR PASS
+                {CONFIG.EVENT_DATE}<br />LOCK IN YOUR PASS
               </h2>
               <p className="hero-description">
                 Team Entry: {CONFIG.TEAM_ENTRY_FEE} ({CONFIG.TEAM_SIZE}). Includes beverages & refreshments + e-certificates for all participants.
@@ -225,7 +214,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
                 <span className="gear-sub">GEAR</span>
                 <span ref={gearRef} className="gear-digit">N</span>
               </div>
-              
+
               {/* Throttle & Speed Bar */}
               <div className="instrument-card instrument-throttle" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: 0 }}>
                 <div className="instrument-meta">

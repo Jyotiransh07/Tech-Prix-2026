@@ -18,14 +18,14 @@ export default function Home() {
 
   return (
     <main>
-      <Navbar 
-        soundEnabled={soundEnabled} 
+      <Navbar
+        soundEnabled={soundEnabled}
         setSoundEnabled={setSoundEnabled}
         onOpenModal={(mode) => setModalMode(mode as "squad" | "duo")}
       />
 
       <HeroCanvas onOpenModal={(mode) => setModalMode(mode as "squad" | "duo")} />
-      
+
       <ExecutiveBriefing />
       <Podium />
       <Disciplines />
