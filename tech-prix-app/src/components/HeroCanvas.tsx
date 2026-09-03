@@ -22,7 +22,11 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
   const sec2Ref = useRef<HTMLDivElement>(null);
   const sec3Ref = useRef<HTMLDivElement>(null);
   const frameCounterRef = useRef<HTMLDivElement>(null);
-  const [activeSlide, setActiveSlide] = useState(0);
+  const slide0Ref = useRef<HTMLDivElement>(null);
+  const slide1Ref = useRef<HTMLDivElement>(null);
+  const slide2Ref = useRef<HTMLDivElement>(null);
+  const slide3Ref = useRef<HTMLDivElement>(null);
+  const currentSlideRef = useRef(0);
   
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadProgress, setLoadProgress] = useState(0);
@@ -31,8 +35,10 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
   // Progressive preload: first batch (frames 1-30) loads immediately for fast first paint,
   // then the rest loads in the background without blocking.
   useEffect(() => {
+    let isCancelled = false;
     let loadedCount = 0;
     const imgs: HTMLImageElement[] = new Array(TOTAL_FRAMES);
+    imagesRef.current = imgs;
     const FIRST_BATCH = 30; // Show hero fast
 
     const loadFrame = (i: number) => {
@@ -41,6 +47,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
       imgs[i - 1] = img;
 
       const checkDone = () => {
+        if (isCancelled) return;
         loadedCount++;
         setLoadProgress(Math.floor((loadedCount / TOTAL_FRAMES) * 100));
         if (loadedCount === TOTAL_FRAMES) {
@@ -48,7 +55,6 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
         }
         // Mark as loaded after first batch so canvas can render
         if (loadedCount === FIRST_BATCH) {
-          imagesRef.current = imgs;
           setIsLoaded(true);
         }
       };
@@ -64,13 +70,16 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
 
     // Load the rest after a small delay (non-blocking)
     const timer = setTimeout(() => {
+      if (isCancelled) return;
       for (let i = FIRST_BATCH + 1; i <= TOTAL_FRAMES; i++) {
         loadFrame(i);
       }
     }, 200);
 
-    imagesRef.current = imgs;
-    return () => clearTimeout(timer);
+    return () => {
+      isCancelled = true;
+      clearTimeout(timer);
+    };
   }, [TOTAL_FRAMES]);
 
 
@@ -82,11 +91,14 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
     const images = imagesRef.current;
 
     let dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let currentRenderedFrame = -1;
+    let targetFrame = 1;
+    let animationFrameId: number;
     
     const renderFrame = (frameNum: number) => {
       const frameIdx = Math.max(1, Math.min(TOTAL_FRAMES, Math.round(frameNum))) - 1;
       const img = images[frameIdx];
-      if (!img || !img.complete || img.naturalWidth === 0) return;
+      if (!img || !img.complete || img.naturalWidth === 0) return false;
 
       const w = window.innerWidth;
       const h = window.innerHeight;
@@ -114,7 +126,22 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
       const posY = (h - drawH) / 2;
 
       ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight, posX, posY, drawW, drawH);
+      return true;
     };
+
+    const renderLoop = () => {
+      if (currentRenderedFrame !== targetFrame) {
+        const success = renderFrame(targetFrame);
+        if (success) {
+          currentRenderedFrame = targetFrame;
+          if (frameCounterRef.current) {
+            frameCounterRef.current.innerText = `FRAME ${String(targetFrame).padStart(3, '0')}/${TOTAL_FRAMES}`;
+          }
+        }
+      }
+      animationFrameId = requestAnimationFrame(renderLoop);
+    };
+    renderLoop();
 
     const handleResize = () => {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -127,7 +154,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
       ctx.scale(dpr, dpr);
       ctx.imageSmoothingEnabled = true;
       (ctx as any).imageSmoothingQuality = 'high';
-      renderFrame(frameRef.current.frame);
+      currentRenderedFrame = -1; // Force redraw on resize
     };
 
     window.addEventListener("resize", handleResize);
@@ -153,27 +180,29 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
         if (sec2Ref.current) sec2Ref.current.className = `sec-flag ${p > 0.33 ? 'active' : ''}`;
         if (sec3Ref.current) sec3Ref.current.className = `sec-flag ${p > 0.66 ? 'active' : ''}`;
         
-        // Update Canvas only if the frame changes (fixes extreme lag)
-        const targetFrame = Math.max(1, Math.min(TOTAL_FRAMES, Math.floor(p * (TOTAL_FRAMES - 1)) + 1));
-        
-        if (frameRef.current.frame !== targetFrame) {
-          frameRef.current.frame = targetFrame;
-          if (frameCounterRef.current) {
-            frameCounterRef.current.innerText = `FRAME ${String(targetFrame).padStart(3, '0')}/${TOTAL_FRAMES}`;
-          }
-          renderFrame(targetFrame);
-        }
+        // Update target frame for the render loop
+        targetFrame = Math.max(1, Math.min(TOTAL_FRAMES, Math.floor(p * (TOTAL_FRAMES - 1)) + 1));
 
-        // Slide transitions (React state is fine here since it bails out if value is same)
-        if (p < 0.25) setActiveSlide(0);
-        else if (p < 0.55) setActiveSlide(1);
-        else if (p < 0.80) setActiveSlide(2);
-        else setActiveSlide(3);
+        // Slide transitions directly via DOM
+        let newSlide = 0;
+        if (p < 0.25) newSlide = 0;
+        else if (p < 0.55) newSlide = 1;
+        else if (p < 0.80) newSlide = 2;
+        else newSlide = 3;
+        
+        if (currentSlideRef.current !== newSlide) {
+          currentSlideRef.current = newSlide;
+          if (slide0Ref.current) slide0Ref.current.className = `story-slide ${newSlide === 0 ? 'active' : ''}`;
+          if (slide1Ref.current) slide1Ref.current.className = `story-slide ${newSlide === 1 ? 'active' : ''}`;
+          if (slide2Ref.current) slide2Ref.current.className = `story-slide ${newSlide === 2 ? 'active' : ''}`;
+          if (slide3Ref.current) slide3Ref.current.className = `story-slide ${newSlide === 3 ? 'active' : ''}`;
+        }
       }
     });
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(animationFrameId);
       st.kill();
     };
   }, [isLoaded]);
@@ -185,7 +214,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
 
         <div className="telemetry-hud-overlay">
           <div className="hud-center-stage">
-            <div className={`story-slide ${activeSlide === 0 ? "active" : ""}`}>
+            <div ref={slide0Ref} className="story-slide active">
               <span className="classification-tag">{CONFIG.ORGANIZERS} PRESENT</span>
               <h1 className="hero-headline text-glitch" data-text="TECH PRIX 2026">
                 TECH PRIX 2026
@@ -203,7 +232,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
               </div>
             </div>
 
-            <div className={`story-slide ${activeSlide === 1 ? "active" : ""}`}>
+            <div ref={slide1Ref} className="story-slide">
               <span className="classification-tag">HACKATHON TRACKS</span>
               <h2 className="hero-headline">
                 HARDWARE CORE<br/>× SOFTWARE LOGIC
@@ -213,23 +242,20 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
               </p>
             </div>
 
-            <div className={`story-slide ${activeSlide === 2 ? "active" : ""}`}>
+            <div ref={slide2Ref} className="story-slide">
               <span className="classification-tag">PRIZE POOL</span>
               <h2 className="hero-headline">
                 {CONFIG.TOTAL_PRIZE}+<br/>CASH PRIZE POOL
               </h2>
-              <p className="hero-description">
-                1st Place: {CONFIG.FIRST_PRIZE} • 2nd Place: {CONFIG.SECOND_PRIZE} • 3rd Place: {CONFIG.THIRD_PRIZE}
-              </p>
             </div>
 
-            <div className={`story-slide ${activeSlide === 3 ? "active" : ""}`}>
+            <div ref={slide3Ref} className="story-slide">
               <span className="classification-tag">REGISTRATION</span>
               <h2 className="hero-headline">
                 {CONFIG.EVENT_DATE}<br/>LOCK IN YOUR PASS
               </h2>
               <p className="hero-description">
-                Team Entry: {CONFIG.TEAM_ENTRY_FEE} ({CONFIG.TEAM_SIZE}). Includes beverages & refreshments + e-certificates for all participants.
+                Team Entry: {CONFIG.TEAM_ENTRY_FEE} ({CONFIG.TEAM_SIZE}). Includes certificates for all participants.
               </p>
               <div className="hero-action-bar">
                 <button className="cta-glory" onClick={() => onOpenModal("register")}>

@@ -66,10 +66,11 @@ export default function Navbar({
           {/* Desktop Nav */}
           <nav className="nav-menu desktop-nav">
             <a href="#about" className="nav-item"><span>// 01</span> ABOUT</a>
-            <a href="#tracks" className="nav-item"><span>// 02</span> CHALLENGES</a>
-            <a href="#podium" className="nav-item"><span>// 03</span> REWARD</a>
+            <a href="#podium" className="nav-item"><span>// 02</span> REWARD</a>
+            <a href="#tracks" className="nav-item"><span>// 03</span> CHALLENGES</a>
             <a href="#circuit" className="nav-item"><span>// 04</span> SCHEDULE</a>
-            <a href="#faq" className="nav-item"><span>// 05</span> FAQS</a>
+            <a href="#rules" className="nav-item"><span>// 05</span> RULES</a>
+            <a href="#faq" className="nav-item"><span>// 06</span> FAQS</a>
           </nav>
 
           <div className="header-controls">
@@ -115,20 +116,24 @@ export default function Navbar({
               <span className="mobile-nav-num">01</span>
               <span className="mobile-nav-label">ABOUT</span>
             </a>
-            <a href="#tracks" className="mobile-nav-item" onClick={() => handleNavClick("#tracks")}>
-              <span className="mobile-nav-num">02</span>
-              <span className="mobile-nav-label">CHALLENGES</span>
-            </a>
             <a href="#podium" className="mobile-nav-item" onClick={() => handleNavClick("#podium")}>
-              <span className="mobile-nav-num">03</span>
+              <span className="mobile-nav-num">02</span>
               <span className="mobile-nav-label">REWARD</span>
+            </a>
+            <a href="#tracks" className="mobile-nav-item" onClick={() => handleNavClick("#tracks")}>
+              <span className="mobile-nav-num">03</span>
+              <span className="mobile-nav-label">CHALLENGES</span>
             </a>
             <a href="#circuit" className="mobile-nav-item" onClick={() => handleNavClick("#circuit")}>
               <span className="mobile-nav-num">04</span>
               <span className="mobile-nav-label">SCHEDULE</span>
             </a>
-            <a href="#faq" className="mobile-nav-item" onClick={() => handleNavClick("#faq")}>
+            <a href="#rules" className="mobile-nav-item" onClick={() => handleNavClick("#rules")}>
               <span className="mobile-nav-num">05</span>
+              <span className="mobile-nav-label">RULES</span>
+            </a>
+            <a href="#faq" className="mobile-nav-item" onClick={() => handleNavClick("#faq")}>
+              <span className="mobile-nav-num">06</span>
               <span className="mobile-nav-label">FAQS</span>
             </a>
           </div>

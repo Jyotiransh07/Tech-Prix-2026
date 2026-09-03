@@ -1,7 +1,26 @@
 "use client";
 import Image from 'next/image';
+import { useEffect, useRef } from 'react';
 
 export default function RulesAndGuidelines() {
+  const listRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        } else {
+          entry.target.classList.remove('in-view');
+        }
+      });
+    }, { threshold: 0.5, rootMargin: "-10% 0px -20% 0px" });
+
+    const items = listRef.current?.querySelectorAll('.tire-bullet-item');
+    items?.forEach(item => observer.observe(item));
+
+    return () => observer.disconnect();
+  }, []);
   return (
     <section id="rules" className="content-section race-regulations" style={{ paddingTop: '40px', paddingBottom: '0px', marginBottom: '0px' }}>
       <div className="f1-container max-w-[1200px] mx-auto px-4">
@@ -15,11 +34,11 @@ export default function RulesAndGuidelines() {
         <div className="relative w-full max-w-[850px] mx-auto mt-8 md:mt-12">
           {/* Rules Card */}
           <div className="rules-container spotlight-card w-full relative z-10 bg-black/80 backdrop-blur-sm">
-            <ul className="tire-list">
+            <ul ref={listRef} className="tire-list">
               <li className="tire-bullet-item">
                 <span className="tire-icon"></span>
                 <div>
-                  <strong>Time Limit:</strong> 6-hour hackathon. All projects must be finished and submitted within this window.
+                  <strong>Time Limit:</strong> 8-hour hackathon. All projects must be finished and submitted within this window.
                 </div>
               </li>
               <li className="tire-bullet-item">

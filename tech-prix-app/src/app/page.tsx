@@ -16,15 +16,19 @@ export default function Home() {
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [modalMode, setModalMode] = useState<"squad" | "duo" | null>(null);
 
+  const handleRegisterClick = () => {
+    window.open("https://docs.google.com/forms/d/e/1FAIpQLSc2iD4mLOo4jrVwfckZq0NEwpFPVxUtpNip5Dyj-3XeIeAEWg/viewform?usp=header", "_blank");
+  };
+
   return (
     <main>
       <Navbar 
         soundEnabled={soundEnabled} 
         setSoundEnabled={setSoundEnabled}
-        onOpenModal={(mode) => setModalMode(mode as "squad" | "duo")}
+        onOpenModal={handleRegisterClick}
       />
 
-      <HeroCanvas onOpenModal={(mode) => setModalMode(mode as "squad" | "duo")} />
+      <HeroCanvas onOpenModal={handleRegisterClick} />
       
       <ExecutiveBriefing />
       <Podium />
@@ -32,7 +36,7 @@ export default function Home() {
       <CircuitTimeline />
       <RulesAndGuidelines />
       <FAQ />
-      <Footer onOpenModal={(mode) => setModalMode(mode as "squad" | "duo")} />
+      <Footer onOpenModal={handleRegisterClick} />
 
       {modalMode && (
         <RegistrationModal mode={modalMode} onClose={() => setModalMode(null)} />

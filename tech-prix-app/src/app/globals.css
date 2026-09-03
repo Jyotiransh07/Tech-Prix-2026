@@ -68,6 +68,22 @@ body {
 }
 
 /* Layout Elements */
+.f1-bg-pattern {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  filter: grayscale(100%);
+  background-image: url(/Design_F1.png);
+  background-size: 100% auto;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
 .paddock-header {
   position: fixed;
   top: 0;
@@ -448,19 +464,19 @@ body {
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
   border-left: 4px solid transparent;
 }
-.f1-schedule-card.sector-1:hover {
+.f1-schedule-card.sector-1:hover, .f1-schedule-card.sector-1.in-view {
   transform: translateX(12px);
   border-left-color: #06b6d4;
   box-shadow: -20px 0 30px -15px rgba(6, 182, 212, 0.6);
   background: linear-gradient(90deg, rgba(6,182,212,0.15) 0%, transparent 100%);
 }
-.f1-schedule-card.sector-2:hover {
+.f1-schedule-card.sector-2:hover, .f1-schedule-card.sector-2.in-view {
   transform: translateX(12px);
   border-left-color: #E10600;
   box-shadow: -20px 0 30px -15px rgba(225, 6, 0, 0.6);
   background: linear-gradient(90deg, rgba(225,6,0,0.15) 0%, transparent 100%);
 }
-.f1-schedule-card.sector-3:hover {
+.f1-schedule-card.sector-3:hover, .f1-schedule-card.sector-3.in-view {
   transform: translateX(12px);
   border-left-color: #FBBF24;
   box-shadow: -20px 0 30px -15px rgba(251, 191, 36, 0.6);
@@ -682,9 +698,9 @@ body {
 .rules-container { padding: 40px; margin-top: 24px; }
 .tire-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 20px; }
 .tire-bullet-item { display: flex; align-items: flex-start; gap: 16px; font-size: 1.05rem; color: var(--text-silver); line-height: 1.6; padding: 16px 20px; border-left: 4px solid transparent; transition: all 0.3s ease; border-radius: 4px; }
-.tire-bullet-item:hover { border-left-color: #E10600; background: linear-gradient(90deg, rgba(225,6,0,0.15) 0%, transparent 100%); transform: translateX(8px); box-shadow: -10px 0 20px -10px rgba(225, 6, 0, 0.5); }
+.tire-bullet-item:hover, .tire-bullet-item.in-view { border-left-color: #E10600; background: linear-gradient(90deg, rgba(225,6,0,0.15) 0%, transparent 100%); transform: translateX(8px); box-shadow: -10px 0 20px -10px rgba(225, 6, 0, 0.5); }
 .tire-bullet-item strong { color: #FFFFFF; margin-right: 6px; transition: color 0.3s ease; }
-.tire-bullet-item:hover strong { color: #E10600; }
+.tire-bullet-item:hover strong, .tire-bullet-item.in-view strong { color: #E10600; }
 .tire-icon {
   width: 24px;
   height: 24px;
@@ -1250,8 +1266,8 @@ nextjs-portal,
 
   /* About section */
   .about-section-new {
-    padding-top: 60px;
-    padding-bottom: 20px;
+    padding-top: 60px !important;
+    padding-bottom: 0px !important;
   }
   .about-main-title {
     font-size: 2rem;
@@ -1283,62 +1299,121 @@ nextjs-portal,
     gap: 16px;
   }
   .about-countdown {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto repeat(4, 1fr);
     margin-top: 20px;
   }
   .countdown-label {
-    grid-column: 1 / -1;
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 12px;
-    font-size: 0.85rem;
+    grid-column: auto;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: none;
+    padding: 10px 12px;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
   }
   .countdown-unit {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 0.8rem;
-    padding: 12px 8px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: none;
+    font-size: 0.6rem;
+    padding: 10px 4px;
   }
   .countdown-unit:nth-child(odd) {
     border-right: 1px solid rgba(255, 255, 255, 0.1);
   }
-  .countdown-unit:last-child,
+  .countdown-unit:last-child {
+    border-right: none;
+    border-bottom: none;
+  }
   .countdown-unit:nth-last-child(2):nth-child(odd) {
     border-bottom: none;
   }
   .countdown-unit span {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   /* Disciplines / tracks */
+  .tracks-showcase {
+    padding-top: 40px !important;
+  }
   .disciplines-grid {
     grid-template-columns: 1fr;
   }
 
+  .f1-bg-pattern {
+    background-size: 1200px auto;
+    background-repeat: repeat;
+    top: 0px;
+  }
+
   /* Podium / Rewards */
   .podium-showcase-new {
-    padding-top: 60px;
-    padding-bottom: 80px;
+    padding-top: 20px !important;
+    padding-bottom: 40px !important;
   }
   .rewards-hero-layout {
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 0 12px;
   }
   .reward-side-card {
-    max-width: 100%;
-    padding: 32px 16px;
+    max-width: calc(50% - 8px);
+    width: calc(50% - 8px);
+    padding: 12px 6px !important;
+    min-height: 180px !important;
+    flex-shrink: 0;
+  }
+  .reward-side-card .theme-title {
+    font-size: 1.1rem !important;
+  }
+  .reward-side-card .theme-subtitle {
+    font-size: 0.65rem !important;
+    line-height: 1.2;
+  }
+  .reward-side-card .theme-icon-wrap svg {
+    width: 40px;
+    height: 40px;
   }
   .reward-center-focus {
+    width: 100%;
     max-width: 100%;
-    margin: 0;
+    order: -1;
+    margin-bottom: 0;
+  }
+  .reward-center-focus .theme-card-new {
+    max-width: 180px;
+    width: 180px;
+    margin: 0 auto;
+    padding: 16px 10px 10px !important;
+    min-height: 180px !important;
+    height: 180px;
+    overflow: hidden;
+  }
+  .reward-center-focus .theme-title-large {
+    font-size: 1.2rem;
+  }
+  .reward-center-focus .theme-subtitle {
+    font-size: 0.65rem !important;
+    line-height: 1.2;
+  }
+  .reward-center-focus .theme-icon-wrap svg {
+    width: 55px;
+    height: 55px;
   }
   .center-img-wrapper {
-    height: 280px;
-    margin-bottom: -60px;
+    height: 240px;
+    margin-bottom: -40px;
+    overflow: visible;
   }
   .champ-hero-img {
-    max-width: 240px;
+    width: 280px;
+    max-width: none;
+    transform: scale(1.2);
+    transform-origin: bottom center;
   }
   .reward-plaque {
     padding: 32px 16px;
@@ -1350,8 +1425,9 @@ nextjs-portal,
   .rc-rank { font-size: 2.5rem; }
   .rc-prize-val { font-size: 2.5rem; }
   .rc-footer-graphic {
-    height: 100px;
-    margin-bottom: -32px;
+    height: 40px;
+    margin-bottom: -15px;
+    margin-top: 5px;
   }
 
   /* Timeline / Schedule */
@@ -1495,6 +1571,124 @@ nextjs-portal,
   .mobile-nav-label {
     font-size: 1.2rem;
   }
+}
+
+/* ==========================================================================
+   THEME REWARDS (NEW LAYOUT)
+   ========================================================================== */
+.theme-card-new {
+  border: 1px solid #E10600 !important;
+  background: linear-gradient(145deg, #111, #000) !important;
+  padding: 40px 20px 20px 20px !important;
+  border-radius: 16px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 380px;
+  box-shadow: 0 0 20px rgba(225, 6, 0, 0.15) !important;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-card-new::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(225, 6, 0, 0.1), transparent);
+  transform: skewX(-25deg);
+  transition: 0.5s;
+}
+
+.theme-card-new:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(225, 6, 0, 0.3), inset 0 0 15px rgba(225, 6, 0, 0.2) !important;
+  border-color: #ff1e1e !important;
+}
+
+.theme-card-new:hover::before {
+  left: 200%;
+}
+
+.theme-card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.theme-icon-wrap {
+  margin-bottom: 24px;
+  color: #E10600;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: drop-shadow(0 0 5px rgba(225, 6, 0, 0.5));
+}
+
+.theme-card-new:hover .theme-icon-wrap {
+  transform: scale(1.1) translateY(-5px);
+  filter: drop-shadow(0 0 15px rgba(225, 6, 0, 0.9));
+}
+
+.theme-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  font-style: italic;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+  transition: text-shadow 0.3s ease;
+}
+
+.theme-card-new:hover .theme-title {
+  text-shadow: 2px 2px 0px rgba(225, 6, 0, 0.7);
+}
+
+.theme-title-large {
+  font-size: 3.5rem;
+  font-weight: 800;
+  font-style: italic;
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(225, 6, 0, 0.3);
+  transition: text-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.theme-card-new:hover .theme-title-large {
+  text-shadow: 0 0 20px rgba(225, 6, 0, 0.8), 2px 2px 0px rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.theme-subtitle {
+  font-size: 1rem;
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+  transition: color 0.3s ease;
+}
+
+.theme-card-new:hover .theme-subtitle.text-white {
+  color: #fca5a5; /* slight red tint on hover for white text */
+}
+
+.theme-divider {
+  width: 40px;
+  height: 3px;
+  background-color: #E10600;
+  margin: 0 auto 10px auto;
+  border-radius: 2px;
+  transition: width 0.3s ease, box-shadow 0.3s ease;
+}
+
+.theme-card-new:hover .theme-divider {
+  width: 80px;
+  box-shadow: 0 0 10px rgba(225, 6, 0, 0.8);
+}
+
+.center-plaque {
+  z-index: 3;
+  position: relative;
+  max-width: 350px !important;
+  width: 100%;
 }
 
 /* ==========================================================================
