@@ -1,4 +1,5 @@
-import { Trophy, Lightbulb, Flag } from 'lucide-react';
+/* eslint-disable @next/next/no-img-element */
+import { Lightbulb, Flag } from 'lucide-react';
 
 const CustomTrophy = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" className="theme-icon">
