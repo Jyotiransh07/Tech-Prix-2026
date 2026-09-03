@@ -1081,9 +1081,11 @@ nextjs-portal,
   z-index: 998;
   opacity: 0;
   transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 .mobile-nav-overlay.open {
   opacity: 1;
+  pointer-events: auto;
 }
 
 /* Slide-in Drawer */
@@ -1469,6 +1471,9 @@ nextjs-portal,
   }
 
   /* FAQ */
+  .faq-list {
+    margin: 0 16px;
+  }
   .faq-trigger {
     font-size: 1rem;
   }

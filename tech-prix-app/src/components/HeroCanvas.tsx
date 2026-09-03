@@ -118,7 +118,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
         drawH = w / imgAspect;
       }
 
-      const scaleFactor = 1.18;
+      const scaleFactor = w < 768 ? 1.25 : 1.18;
       drawW *= scaleFactor;
       drawH *= scaleFactor;
 
