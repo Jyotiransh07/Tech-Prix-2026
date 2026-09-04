@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useMemo } from "react";
+import NextImage from "next/image";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { CONFIG } from "../config";
@@ -230,7 +231,26 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
                   REGISTER NOW
                 </button>
               </div>
+
+              {/* Mobile-only sponsor logos (desktop uses HUD bottom-right) */}
+              <div className="mobile-sponsors">
+                <NextImage
+                  src="/logos/BINA.jpeg"
+                  alt="BINA"
+                  width={120}
+                  height={60}
+                  style={{ objectFit: "contain", borderRadius: "6px", opacity: 0.85 }}
+                />
+                <NextImage
+                  src="/logos/PrePark.jpeg"
+                  alt="PrePark"
+                  width={120}
+                  height={60}
+                  style={{ objectFit: "contain", borderRadius: "6px", opacity: 0.85 }}
+                />
+              </div>
             </div>
+
 
             <div ref={slide1Ref} className="story-slide">
               <span className="classification-tag">HACKATHON TRACKS</span>
@@ -289,15 +309,35 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
             {/* Empty Center */}
             <div></div>
 
-            {/* Sector & Frame Counter */}
+            {/* Sector & Frame Counter + Sponsors */}
             <div className="instrument-card instrument-sectors" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: 0 }}>
-              <div className="sector-flags">
-                <div ref={sec1Ref} className="sec-flag active"><span>S1</span><i className="sec-dot"></i></div>
-                <div ref={sec2Ref} className="sec-flag"><span>S2</span><i className="sec-dot"></i></div>
-                <div ref={sec3Ref} className="sec-flag"><span>S3</span><i className="sec-dot"></i></div>
+              <div className="sector-flags-row">
+                {/* Sponsor logos inline left of sector flags */}
+                <div className="hud-sponsors-logos">
+                  <NextImage
+                    src="/logos/BINA.jpeg"
+                    alt="BINA"
+                    width={150}
+                    height={75}
+                    style={{ objectFit: "contain", borderRadius: "4px", opacity: 0.85 }}
+                  />
+                  <NextImage
+                    src="/logos/PrePark.jpeg"
+                    alt="PrePark"
+                    width={150}
+                    height={75}
+                    style={{ objectFit: "contain", borderRadius: "4px", opacity: 0.85 }}
+                  />
+                </div>
+                <div className="sector-flags">
+                  <div ref={sec1Ref} className="sec-flag active"><span>S1</span><i className="sec-dot"></i></div>
+                  <div ref={sec2Ref} className="sec-flag"><span>S2</span><i className="sec-dot"></i></div>
+                  <div ref={sec3Ref} className="sec-flag"><span>S3</span><i className="sec-dot"></i></div>
+                </div>
               </div>
               <div ref={frameCounterRef} className="frame-index-counter">FRAME 001/{TOTAL_FRAMES}</div>
             </div>
+
           </div>
         </div>
       </div>

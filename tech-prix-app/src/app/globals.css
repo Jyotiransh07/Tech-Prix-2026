@@ -1736,3 +1736,43 @@ nextjs-portal,
     animation-duration: 0.01ms !important;
   }
 }
+
+/* ==========================================================================
+   HUD SPONSORS — inline left of sector flags
+   ========================================================================== */
+.sector-flags-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.hud-sponsors-logos {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hud-sponsors-logos img {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.hud-sponsors-logos img:hover {
+  opacity: 1 !important;
+  transform: scale(1.06);
+}
+
+/* Mobile sponsor strip — hidden on desktop, shown on phones */
+.mobile-sponsors {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-sponsors {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 12px;
+  }
+}
