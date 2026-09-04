@@ -10,6 +10,7 @@ import CircuitTimeline from "@/components/CircuitTimeline";
 import RulesAndGuidelines from "@/components/RulesAndGuidelines";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
+import Sponsors from "@/components/Sponsors";
 import RegistrationModal from "@/components/RegistrationModal";
 
 export default function Home() {
@@ -36,6 +37,7 @@ export default function Home() {
       <CircuitTimeline />
       <RulesAndGuidelines />
       <FAQ />
+      <Sponsors />
       <Footer onOpenModal={handleRegisterClick} />
 
       {modalMode && (
