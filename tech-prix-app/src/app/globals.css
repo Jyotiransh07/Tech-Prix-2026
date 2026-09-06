@@ -2302,19 +2302,19 @@ nextjs-portal,
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 600px;
-  margin: 1rem auto 4rem auto;
+  margin: 2rem auto 2rem auto;
 }
 
 .f1-timer-header {
-  font-size: 1.5rem;
+  font-size: clamp(0.75rem, 3.5vw, 1.15rem);
   font-weight: 900;
-  letter-spacing: 0.4em;
+  letter-spacing: clamp(0.15em, 1.5vw, 0.5em);
   text-transform: uppercase;
   color: #ffffff;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   text-align: center;
   text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
 }
 
 .f1-timer-row {
@@ -2327,7 +2327,7 @@ nextjs-portal,
 
 @media (min-width: 640px) {
   .f1-timer-row {
-    gap: 2rem;
+    gap: 1.25rem;
   }
 }
 
@@ -2335,17 +2335,17 @@ nextjs-portal,
   position: relative;
   display: flex;
   justify-content: center;
-  width: 4rem;
+  width: clamp(2.5rem, 12vw, 4rem);
 }
 
 @media (min-width: 640px) {
   .f1-timer-box {
-    width: 6rem;
+    width: 4rem;
   }
 }
 
 .f1-timer-num {
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 10vw, 3.5rem);
   font-weight: 600;
   color: #ffffff;
   letter-spacing: -0.025em;
@@ -2354,7 +2354,7 @@ nextjs-portal,
 
 @media (min-width: 640px) {
   .f1-timer-num {
-    font-size: 4.5rem;
+    font-size: 3.5rem;
   }
 }
 
@@ -2368,11 +2368,11 @@ nextjs-portal,
   bottom: -2rem;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.75rem;
+  font-size: clamp(0.55rem, 2.5vw, 0.75rem);
   font-weight: 700;
   color: rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
-  letter-spacing: 0.25em;
+  letter-spacing: clamp(0.05em, 1vw, 0.25em);
   white-space: nowrap;
   background: transparent;
   padding: 0;
@@ -2401,16 +2401,16 @@ nextjs-portal,
 }
 
 .f1-timer-dot {
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
   background-color: #ffffff;
   border-radius: 50%;
 }
 
 @media (min-width: 640px) {
   .f1-timer-dot {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
   }
 }
 
