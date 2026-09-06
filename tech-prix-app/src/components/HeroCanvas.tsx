@@ -14,8 +14,6 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
 
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const progressRef = useRef<HTMLDivElement>(null);
-  const frameRef = useRef({ frame: 1 });
   const speedRef = useRef<HTMLSpanElement>(null);
   const throttleRef = useRef<HTMLDivElement>(null);
   const gearRef = useRef<HTMLSpanElement>(null);
@@ -28,9 +26,8 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
   const slide2Ref = useRef<HTMLDivElement>(null);
   const slide3Ref = useRef<HTMLDivElement>(null);
   const currentSlideRef = useRef(0);
-  
+
   const [isLoaded, setIsLoaded] = useState(false);
-  const [loadProgress, setLoadProgress] = useState(0);
   const imagesRef = useRef<HTMLImageElement[]>([]);
 
   // Progressive preload: first batch (frames 1-30) loads immediately for fast first paint,
@@ -50,7 +47,6 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
       const checkDone = () => {
         if (isCancelled) return;
         loadedCount++;
-        setLoadProgress(Math.floor((loadedCount / TOTAL_FRAMES) * 100));
         if (loadedCount === TOTAL_FRAMES) {
           setIsLoaded(true);
         }
@@ -95,7 +91,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
     let currentRenderedFrame = -1;
     let targetFrame = 1;
     let animationFrameId: number;
-    
+
     const renderFrame = (frameNum: number) => {
       const frameIdx = Math.max(1, Math.min(TOTAL_FRAMES, Math.round(frameNum))) - 1;
       const img = images[frameIdx];
@@ -154,6 +150,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
       canvas.style.height = `${h}px`;
       ctx.scale(dpr, dpr);
       ctx.imageSmoothingEnabled = true;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (ctx as any).imageSmoothingQuality = 'high';
       currentRenderedFrame = -1; // Force redraw on resize
     };
@@ -169,7 +166,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
       scrub: 1.5, // Increased for smoother scroll easing
       onUpdate: (self) => {
         const p = self.progress;
-        
+
         // Update direct DOM refs to avoid 60fps React re-renders
         if (speedRef.current) speedRef.current.innerText = String(Math.floor(p * 308)).padStart(3, '0');
         if (throttleRef.current) throttleRef.current.style.width = `${p * 100}%`;
@@ -180,7 +177,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
         if (sec1Ref.current) sec1Ref.current.className = `sec-flag ${p >= 0 ? 'active' : ''}`;
         if (sec2Ref.current) sec2Ref.current.className = `sec-flag ${p > 0.33 ? 'active' : ''}`;
         if (sec3Ref.current) sec3Ref.current.className = `sec-flag ${p > 0.66 ? 'active' : ''}`;
-        
+
         // Update target frame for the render loop
         targetFrame = Math.max(1, Math.min(TOTAL_FRAMES, Math.floor(p * (TOTAL_FRAMES - 1)) + 1));
 
@@ -190,7 +187,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
         else if (p < 0.55) newSlide = 1;
         else if (p < 0.80) newSlide = 2;
         else newSlide = 3;
-        
+
         if (currentSlideRef.current !== newSlide) {
           currentSlideRef.current = newSlide;
           if (slide0Ref.current) slide0Ref.current.className = `story-slide ${newSlide === 0 ? 'active' : ''}`;
@@ -255,24 +252,24 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
             <div ref={slide1Ref} className="story-slide">
               <span className="classification-tag">HACKATHON TRACKS</span>
               <h2 className="hero-headline">
-                HARDWARE CORE<br/>× SOFTWARE LOGIC
+                HARDWARE CORE<br />× SOFTWARE LOGIC
               </h2>
               <p className="hero-description">
-                Whether you're designing custom circuits, programming microcontrollers, or building software to control physical devices — choose your track.
+                Whether you&apos;re designing custom circuits, programming microcontrollers, or building software to control physical devices — choose your track.
               </p>
             </div>
 
             <div ref={slide2Ref} className="story-slide">
               <span className="classification-tag">PRIZE POOL</span>
               <h2 className="hero-headline">
-                {CONFIG.TOTAL_PRIZE}+<br/>CASH PRIZE POOL
+                {CONFIG.TOTAL_PRIZE}+<br />CASH PRIZE POOL
               </h2>
             </div>
 
             <div ref={slide3Ref} className="story-slide">
               <span className="classification-tag">REGISTRATION</span>
               <h2 className="hero-headline">
-                {CONFIG.EVENT_DATE}<br/>LOCK IN YOUR PASS
+                {CONFIG.EVENT_DATE}<br />LOCK IN YOUR PASS
               </h2>
               <p className="hero-description">
                 Team Entry: {CONFIG.TEAM_ENTRY_FEE} ({CONFIG.TEAM_SIZE}). Includes certificates for all participants.
@@ -293,7 +290,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
                 <span className="gear-sub">GEAR</span>
                 <span ref={gearRef} className="gear-digit">N</span>
               </div>
-              
+
               {/* Throttle & Speed Bar */}
               <div className="instrument-card instrument-throttle" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: 0 }}>
                 <div className="instrument-meta">
@@ -313,19 +310,19 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
             <div className="instrument-card instrument-sectors" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: 0 }}>
               <div className="sector-flags-row">
                 {/* Sponsor logos inline left of sector flags */}
-                <div className="hud-sponsors-logos">
+                <div className="hud-sponsors-logos" style={{ gap: '30px', marginRight: '24px' }}>
                   <NextImage
                     src="/logos/BINA.jpeg"
                     alt="BINA"
-                    width={150}
-                    height={75}
+                    width={90}
+                    height={90}
                     style={{ objectFit: "contain", borderRadius: "4px", opacity: 0.85 }}
                   />
                   <NextImage
                     src="/logos/PrePark.jpeg"
                     alt="PrePark"
-                    width={150}
-                    height={75}
+                    width={90}
+                    height={90}
                     style={{ objectFit: "contain", borderRadius: "4px", opacity: 0.85 }}
                   />
                 </div>

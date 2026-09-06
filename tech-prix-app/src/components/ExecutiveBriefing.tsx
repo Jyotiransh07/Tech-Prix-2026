@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 import { useEffect, useState } from 'react';
 
@@ -35,7 +36,7 @@ export default function ExecutiveBriefing() {
   return (
     <section id="about" className="content-section about-section-new" style={{ scrollMarginTop: '0px', paddingTop: '120px' }}>
       <div className="f1-container max-w-1200">
-        
+
         {/* Top Stats Bar */}
         <div className="about-stats-bar">
           <div className="stat-item">2-4 Team Members</div>
@@ -51,15 +52,15 @@ export default function ExecutiveBriefing() {
         <div className="about-content-split">
           <div className="about-image-col">
             {/* The user provided Mercedes F1 car image */}
-            <img 
-              src="/mercedes-f1.png" 
-              alt="Tech Prix Mercedes F1" 
+            <img
+              src="/mercedes-f1.png"
+              alt="Tech Prix Mercedes F1"
               className="about-f1-img mercedes-glow"
               loading="lazy"
               decoding="async"
             />
           </div>
-          
+
           <div className="about-text-col">
             <p>
               Welcome to the inaugural edition of <strong>Tech Prix 2026</strong> — a high-octane hardware and software integration hackathon.
@@ -72,12 +73,56 @@ export default function ExecutiveBriefing() {
             </p>
 
             {/* Countdown */}
-            <div className="about-countdown">
-              <div className="countdown-label">Registration closing</div>
-              <div className="countdown-unit"><span>{timeLeft.days}</span> Days</div>
-              <div className="countdown-unit"><span>{timeLeft.hours}</span> Hrs</div>
-              <div className="countdown-unit"><span>{timeLeft.minutes}</span> Mins</div>
-              <div className="countdown-unit"><span>{timeLeft.seconds}</span> Secs</div>
+            {/* Countdown */}
+            <div className="f1-timer-wrapper">
+              <h3 className="f1-timer-header">Registrations Closing In</h3>
+              <div className="f1-timer-row">
+
+                {/* Days */}
+                <div className="f1-timer-box">
+                  <span className="f1-timer-num">{String(timeLeft.days).padStart(2, '0')}</span>
+                  <span className="f1-timer-label">DAY(S)</span>
+                </div>
+
+                {/* Separator */}
+                <div className="f1-timer-colon-box">
+                  <div className="f1-timer-dot"></div>
+                  <div className="f1-timer-dot"></div>
+                </div>
+
+                {/* Hours */}
+                <div className="f1-timer-box">
+                  <span className="f1-timer-num">{String(timeLeft.hours).padStart(2, '0')}</span>
+                  <span className="f1-timer-label">HOUR(S)</span>
+                </div>
+
+                {/* Separator */}
+                <div className="f1-timer-colon-box">
+                  <div className="f1-timer-dot"></div>
+                  <div className="f1-timer-dot"></div>
+                </div>
+
+                {/* Minutes */}
+                <div className="f1-timer-box">
+                  <span className="f1-timer-num cyan">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                  <span className="f1-timer-label cyan timer-label-desktop">MINUTE(S)</span>
+                  <span className="f1-timer-label cyan timer-label-mobile">MIN(S)</span>
+                </div>
+
+                {/* Separator */}
+                <div className="f1-timer-colon-box cyan">
+                  <div className="f1-timer-dot cyan"></div>
+                  <div className="f1-timer-dot cyan"></div>
+                </div>
+
+                {/* Seconds */}
+                <div className="f1-timer-box">
+                  <span className="f1-timer-num cyan">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                  <span className="f1-timer-label cyan timer-label-desktop">SECOND(S)</span>
+                  <span className="f1-timer-label cyan timer-label-mobile">SEC(S)</span>
+                </div>
+
+              </div>
             </div>
           </div>
         </div>

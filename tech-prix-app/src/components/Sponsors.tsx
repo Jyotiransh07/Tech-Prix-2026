@@ -21,8 +21,8 @@ export default function Sponsors() {
         <Image
           src="/logos/BINA.jpeg"
           alt="BINA"
-          width={300}
-          height={150}
+          width={200}
+          height={100}
           style={{
             objectFit: "contain",
             opacity: 0.85,
@@ -35,8 +35,8 @@ export default function Sponsors() {
         <Image
           src="/logos/PrePark.jpeg"
           alt="PrePark"
-          width={300}
-          height={150}
+          width={200}
+          height={100}
           style={{
             objectFit: "contain",
             opacity: 0.85,
