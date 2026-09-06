@@ -14,8 +14,6 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
 
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const progressRef = useRef<HTMLDivElement>(null);
-  const frameRef = useRef({ frame: 1 });
   const speedRef = useRef<HTMLSpanElement>(null);
   const throttleRef = useRef<HTMLDivElement>(null);
   const gearRef = useRef<HTMLSpanElement>(null);
@@ -30,7 +28,6 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
   const currentSlideRef = useRef(0);
 
   const [isLoaded, setIsLoaded] = useState(false);
-  const [loadProgress, setLoadProgress] = useState(0);
   const imagesRef = useRef<HTMLImageElement[]>([]);
 
   // Progressive preload: first batch (frames 1-30) loads immediately for fast first paint,
@@ -50,7 +47,6 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
       const checkDone = () => {
         if (isCancelled) return;
         loadedCount++;
-        setLoadProgress(Math.floor((loadedCount / TOTAL_FRAMES) * 100));
         if (loadedCount === TOTAL_FRAMES) {
           setIsLoaded(true);
         }
@@ -154,6 +150,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
       canvas.style.height = `${h}px`;
       ctx.scale(dpr, dpr);
       ctx.imageSmoothingEnabled = true;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (ctx as any).imageSmoothingQuality = 'high';
       currentRenderedFrame = -1; // Force redraw on resize
     };
@@ -258,7 +255,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
                 HARDWARE CORE<br />× SOFTWARE LOGIC
               </h2>
               <p className="hero-description">
-                Whether you're designing custom circuits, programming microcontrollers, or building software to control physical devices — choose your track.
+                Whether you&apos;re designing custom circuits, programming microcontrollers, or building software to control physical devices — choose your track.
               </p>
             </div>
 

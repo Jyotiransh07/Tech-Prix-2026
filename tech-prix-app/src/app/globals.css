@@ -1155,6 +1155,10 @@ nextjs-portal,
   height: auto;
   border-radius: 4px;
   object-fit: cover;
+  transform: scale(1.1);
+  transform-origin: center;
+  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 95%);
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 95%);
 }
 
 .about-text-col {
