@@ -73,55 +73,52 @@ export default function ExecutiveBriefing() {
 
             {/* Countdown */}
             {/* Countdown */}
-            <div className="mt-10 p-4 sm:p-6 bg-black/10 rounded-xl backdrop-blur-xl shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col items-center w-full max-w-xl mx-auto mobile-countdown-gap">
-              {/* Transparent Header */}
-              <div className="bg-transparent text-white w-full text-center">
-                <h3 className="text-base sm:text-xl font-black tracking-[0.3em] uppercase m-0 drop-shadow-lg">Registrations Closing In</h3>
-              </div>
-
-              {/* Transparent Countdown Blocks with Colons */}
-              <div className="flex items-center justify-center w-full mt-4 px-1 gap-2 sm:gap-3">
+            <div className="f1-timer-wrapper">
+              <h3 className="f1-timer-header">Registrations Closing In</h3>
+              <div className="f1-timer-row">
+                
                 {/* Days */}
-                <div className="flex flex-col items-center justify-center bg-transparent py-3 sm:py-4 w-full max-w-[85px] sm:max-w-[100px]">
-                  <span className="text-3xl sm:text-5xl font-bold text-white tracking-tighter">{String(timeLeft.days).padStart(2, '0')}</span>
-                  <span className="text-[9px] sm:text-[10px] font-semibold text-white/50 uppercase tracking-[0.2em] mt-2">Days</span>
+                <div className="f1-timer-box">
+                  <span className="f1-timer-num">{String(timeLeft.days).padStart(2, '0')}</span>
+                  <span className="f1-timer-label">DAYS</span>
                 </div>
 
                 {/* Separator */}
-                <div className="flex flex-col space-y-1.5 opacity-60">
-                  <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shadow-[0_0_10px_rgba(255,255,255,0.5)]"></div>
-                  <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shadow-[0_0_10px_rgba(255,255,255,0.5)]"></div>
+                <div className="f1-timer-colon-box">
+                  <div className="f1-timer-dot"></div>
+                  <div className="f1-timer-dot"></div>
                 </div>
 
                 {/* Hours */}
-                <div className="flex flex-col items-center justify-center bg-transparent py-3 sm:py-4 w-full max-w-[85px] sm:max-w-[100px]">
-                  <span className="text-3xl sm:text-5xl font-bold text-white tracking-tighter">{String(timeLeft.hours).padStart(2, '0')}</span>
-                  <span className="text-[9px] sm:text-[10px] font-semibold text-white/50 uppercase tracking-[0.2em] mt-2">Hours</span>
+                <div className="f1-timer-box">
+                  <span className="f1-timer-num">{String(timeLeft.hours).padStart(2, '0')}</span>
+                  <span className="f1-timer-label">HOURS</span>
                 </div>
 
                 {/* Separator */}
-                <div className="flex flex-col space-y-1.5 opacity-60">
-                  <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shadow-[0_0_10px_rgba(255,255,255,0.5)]"></div>
-                  <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white rounded-full shadow-[0_0_10px_rgba(255,255,255,0.5)]"></div>
+                <div className="f1-timer-colon-box">
+                  <div className="f1-timer-dot"></div>
+                  <div className="f1-timer-dot"></div>
                 </div>
 
                 {/* Minutes */}
-                <div className="flex flex-col items-center justify-center bg-transparent py-3 sm:py-4 w-full max-w-[85px] sm:max-w-[100px]">
-                  <span className="text-3xl sm:text-5xl font-bold text-[#00E5CC] tracking-tighter">{String(timeLeft.minutes).padStart(2, '0')}</span>
-                  <span className="text-[9px] sm:text-[10px] font-semibold text-[#00E5CC]/60 uppercase tracking-[0.2em] mt-2">Minutes</span>
+                <div className="f1-timer-box">
+                  <span className="f1-timer-num cyan">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                  <span className="f1-timer-label cyan">MINUTES</span>
                 </div>
 
                 {/* Separator */}
-                <div className="flex flex-col space-y-1.5 opacity-60">
-                  <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-[#00E5CC] rounded-full shadow-[0_0_10px_rgba(0,229,204,0.5)]"></div>
-                  <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-[#00E5CC] rounded-full shadow-[0_0_10px_rgba(0,229,204,0.5)]"></div>
+                <div className="f1-timer-colon-box cyan">
+                  <div className="f1-timer-dot cyan"></div>
+                  <div className="f1-timer-dot cyan"></div>
                 </div>
 
                 {/* Seconds */}
-                <div className="flex flex-col items-center justify-center bg-transparent py-3 sm:py-4 w-full max-w-[85px] sm:max-w-[100px]">
-                  <span className="text-3xl sm:text-5xl font-bold text-[#00E5CC] tracking-tighter">{String(timeLeft.seconds).padStart(2, '0')}</span>
-                  <span className="text-[9px] sm:text-[10px] font-semibold text-[#00E5CC]/60 uppercase tracking-[0.2em] mt-2">Seconds</span>
+                <div className="f1-timer-box">
+                  <span className="f1-timer-num cyan">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                  <span className="f1-timer-label cyan">SECONDS</span>
                 </div>
+                
               </div>
             </div>
           </div>
