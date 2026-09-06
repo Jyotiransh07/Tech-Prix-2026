@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 :root {
   --bg-pure: #000000;
   --bg-carbon: #0a0a0a;
@@ -770,15 +769,34 @@ body {
 }
 
 .faq-drawer {
-  display: none;
-  margin-top: 16px;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease, margin-top 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  margin-top: 0;
   color: var(--text-silver);
   font-size: 0.9375rem;
   line-height: 1.5;
 }
 
+.faq-drawer > p {
+  overflow: hidden;
+  margin: 0;
+}
+
 .faq-block.active .faq-drawer {
-  display: block;
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: 16px;
+}
+
+.faq-arrow {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.faq-block.active .faq-arrow {
+  transform: rotate(180deg);
+  color: #E10600;
 }
 
 /* Preloader */
@@ -1023,8 +1041,11 @@ body {
 
 .tire-bullet-item {
   display: flex;
+  flex-direction: row;
   align-items: flex-start;
-  gap: 16px;
+  justify-content: flex-start;
+  text-align: left;
+  gap: 20px;
   font-size: 1.05rem;
   color: var(--text-silver);
   line-height: 1.6;
@@ -1046,6 +1067,7 @@ body {
   color: #FFFFFF;
   margin-right: 6px;
   transition: color 0.3s ease;
+  display: inline;
 }
 
 .tire-bullet-item:hover strong,
@@ -1059,7 +1081,7 @@ body {
   flex-shrink: 0;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cline x1='12' y1='2' x2='12' y2='8'/%3E%3Cline x1='12' y1='16' x2='12' y2='22'/%3E%3Cline x1='4.93' y1='4.93' x2='9.17' y2='9.17'/%3E%3Cline x1='14.83' y1='14.83' x2='19.07' y2='19.07'/%3E%3Cline x1='2' y1='12' x2='8' y2='12'/%3E%3Cline x1='16' y1='12' x2='22' y2='12'/%3E%3Cline x1='4.93' y1='19.07' x2='9.17' y2='14.83'/%3E%3Cline x1='14.83' y1='9.17' x2='19.07' y2='4.93'/%3E%3C/svg%3E");
   background-size: cover;
-  margin-top: 2px;
+  margin-top: 4px;
 }
 
 /* Force hide Next.js dev tools indicator */
@@ -1214,6 +1236,10 @@ nextjs-portal,
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     justify-content: center;
+  }
+
+  .mobile-countdown-gap {
+    margin-bottom: 40px !important;
   }
 }
 
@@ -1946,8 +1972,8 @@ nextjs-portal,
 
   .tire-bullet-item {
     font-size: 0.95rem;
-    padding: 12px 12px;
-    gap: 12px;
+    padding: 16px 12px;
+    gap: 16px;
   }
 
   /* FAQ */
@@ -2248,4 +2274,179 @@ nextjs-portal,
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
+}
+
+/* ==========================================================================
+   HUD SPONSORS — inline left of sector flags
+   ========================================================================== */
+.sector-flags-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.hud-sponsors-logos {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hud-sponsors-logos img {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.hud-sponsors-logos img:hover {
+  opacity: 1 !important;
+  transform: scale(1.06);
+}
+
+/* Mobile sponsor strip — hidden on desktop, shown on phones */
+.mobile-sponsors {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-sponsors {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 12px;
+  }
+}
+
+/* ==========================================================================
+   COUNTDOWN TIMER OVERHAUL (Custom Vanilla CSS)
+   ========================================================================== */
+.f1-timer-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 2rem auto 2rem auto;
+}
+
+.f1-timer-header {
+  font-size: clamp(0.75rem, 3.5vw, 1.15rem);
+  font-weight: 900;
+  letter-spacing: clamp(0.15em, 1.5vw, 0.5em);
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+
+.f1-timer-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .f1-timer-row {
+    gap: 1.25rem;
+  }
+}
+
+.f1-timer-box {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: clamp(2.5rem, 12vw, 4rem);
+}
+
+@media (min-width: 640px) {
+  .f1-timer-box {
+    width: 4rem;
+  }
+}
+
+.f1-timer-num {
+  font-size: clamp(2rem, 10vw, 3.5rem);
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+
+@media (min-width: 640px) {
+  .f1-timer-num {
+    font-size: 3.5rem;
+  }
+}
+
+.f1-timer-num.cyan {
+  color: #00E5CC;
+  text-shadow: 0 0 15px rgba(0, 229, 204, 0.3);
+}
+
+.f1-timer-label {
+  position: absolute;
+  bottom: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(0.55rem, 2.5vw, 0.75rem);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: clamp(0.05em, 1vw, 0.25em);
+  white-space: nowrap;
+  background: transparent;
+  padding: 0;
+  border: none;
+}
+
+.f1-timer-label.cyan {
+  color: #00E5CC;
+}
+
+/* Desktop: show full label, hide short */
+.timer-label-mobile { display: none; }
+.timer-label-desktop { display: block; }
+
+/* Mobile: show short label, hide full */
+@media (max-width: 480px) {
+  .timer-label-mobile { display: block; }
+  .timer-label-desktop { display: none; }
+}
+
+.f1-timer-colon-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  opacity: 0.5;
+}
+
+@media (min-width: 640px) {
+  .f1-timer-colon-box {
+    gap: 0.75rem;
+  }
+}
+
+.f1-timer-colon-box.cyan {
+  opacity: 0.9;
+}
+
+.f1-timer-dot {
+  width: 4px;
+  height: 4px;
+  background-color: #ffffff;
+  border-radius: 50%;
+}
+
+@media (min-width: 640px) {
+  .f1-timer-dot {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+.f1-timer-dot.cyan {
+  background-color: #00E5CC;
+  box-shadow: 0 0 10px rgba(0, 229, 204, 0.8);
 }

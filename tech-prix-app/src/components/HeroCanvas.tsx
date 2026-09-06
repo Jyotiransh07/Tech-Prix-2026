@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
+import NextImage from "next/image";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { CONFIG } from "../config";
@@ -25,7 +26,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
   const slide2Ref = useRef<HTMLDivElement>(null);
   const slide3Ref = useRef<HTMLDivElement>(null);
   const currentSlideRef = useRef(0);
-  
+
   const [isLoaded, setIsLoaded] = useState(false);
   const imagesRef = useRef<HTMLImageElement[]>([]);
 
@@ -90,7 +91,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
     let currentRenderedFrame = -1;
     let targetFrame = 1;
     let animationFrameId: number;
-    
+
     const renderFrame = (frameNum: number) => {
       const frameIdx = Math.max(1, Math.min(TOTAL_FRAMES, Math.round(frameNum))) - 1;
       const img = images[frameIdx];
@@ -165,7 +166,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
       scrub: 1.5, // Increased for smoother scroll easing
       onUpdate: (self) => {
         const p = self.progress;
-        
+
         // Update direct DOM refs to avoid 60fps React re-renders
         if (speedRef.current) speedRef.current.innerText = String(Math.floor(p * 308)).padStart(3, '0');
         if (throttleRef.current) throttleRef.current.style.width = `${p * 100}%`;
@@ -176,7 +177,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
         if (sec1Ref.current) sec1Ref.current.className = `sec-flag ${p >= 0 ? 'active' : ''}`;
         if (sec2Ref.current) sec2Ref.current.className = `sec-flag ${p > 0.33 ? 'active' : ''}`;
         if (sec3Ref.current) sec3Ref.current.className = `sec-flag ${p > 0.66 ? 'active' : ''}`;
-        
+
         // Update target frame for the render loop
         targetFrame = Math.max(1, Math.min(TOTAL_FRAMES, Math.floor(p * (TOTAL_FRAMES - 1)) + 1));
 
@@ -186,7 +187,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
         else if (p < 0.55) newSlide = 1;
         else if (p < 0.80) newSlide = 2;
         else newSlide = 3;
-        
+
         if (currentSlideRef.current !== newSlide) {
           currentSlideRef.current = newSlide;
           if (slide0Ref.current) slide0Ref.current.className = `story-slide ${newSlide === 0 ? 'active' : ''}`;
@@ -227,12 +228,31 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
                   REGISTER NOW
                 </button>
               </div>
+
+              {/* Mobile-only sponsor logos (desktop uses HUD bottom-right) */}
+              <div className="mobile-sponsors">
+                <NextImage
+                  src="/logos/BINA.jpeg"
+                  alt="BINA"
+                  width={120}
+                  height={60}
+                  style={{ objectFit: "contain", borderRadius: "6px", opacity: 0.85 }}
+                />
+                <NextImage
+                  src="/logos/PrePark.jpeg"
+                  alt="PrePark"
+                  width={120}
+                  height={60}
+                  style={{ objectFit: "contain", borderRadius: "6px", opacity: 0.85 }}
+                />
+              </div>
             </div>
+
 
             <div ref={slide1Ref} className="story-slide">
               <span className="classification-tag">HACKATHON TRACKS</span>
               <h2 className="hero-headline">
-                HARDWARE CORE<br/>× SOFTWARE LOGIC
+                HARDWARE CORE<br />× SOFTWARE LOGIC
               </h2>
               <p className="hero-description">
                 Whether you&apos;re designing custom circuits, programming microcontrollers, or building software to control physical devices — choose your track.
@@ -242,14 +262,14 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
             <div ref={slide2Ref} className="story-slide">
               <span className="classification-tag">PRIZE POOL</span>
               <h2 className="hero-headline">
-                {CONFIG.TOTAL_PRIZE}+<br/>CASH PRIZE POOL
+                {CONFIG.TOTAL_PRIZE}+<br />CASH PRIZE POOL
               </h2>
             </div>
 
             <div ref={slide3Ref} className="story-slide">
               <span className="classification-tag">REGISTRATION</span>
               <h2 className="hero-headline">
-                {CONFIG.EVENT_DATE}<br/>LOCK IN YOUR PASS
+                {CONFIG.EVENT_DATE}<br />LOCK IN YOUR PASS
               </h2>
               <p className="hero-description">
                 Team Entry: {CONFIG.TEAM_ENTRY_FEE} ({CONFIG.TEAM_SIZE}). Includes certificates for all participants.
@@ -270,7 +290,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
                 <span className="gear-sub">GEAR</span>
                 <span ref={gearRef} className="gear-digit">N</span>
               </div>
-              
+
               {/* Throttle & Speed Bar */}
               <div className="instrument-card instrument-throttle" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: 0 }}>
                 <div className="instrument-meta">
@@ -286,15 +306,35 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
             {/* Empty Center */}
             <div></div>
 
-            {/* Sector & Frame Counter */}
+            {/* Sector & Frame Counter + Sponsors */}
             <div className="instrument-card instrument-sectors" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: 0 }}>
-              <div className="sector-flags">
-                <div ref={sec1Ref} className="sec-flag active"><span>S1</span><i className="sec-dot"></i></div>
-                <div ref={sec2Ref} className="sec-flag"><span>S2</span><i className="sec-dot"></i></div>
-                <div ref={sec3Ref} className="sec-flag"><span>S3</span><i className="sec-dot"></i></div>
+              <div className="sector-flags-row">
+                {/* Sponsor logos inline left of sector flags */}
+                <div className="hud-sponsors-logos" style={{ gap: '30px', marginRight: '24px' }}>
+                  <NextImage
+                    src="/logos/BINA.jpeg"
+                    alt="BINA"
+                    width={90}
+                    height={90}
+                    style={{ objectFit: "contain", borderRadius: "4px", opacity: 0.85 }}
+                  />
+                  <NextImage
+                    src="/logos/PrePark.jpeg"
+                    alt="PrePark"
+                    width={90}
+                    height={90}
+                    style={{ objectFit: "contain", borderRadius: "4px", opacity: 0.85 }}
+                  />
+                </div>
+                <div className="sector-flags">
+                  <div ref={sec1Ref} className="sec-flag active"><span>S1</span><i className="sec-dot"></i></div>
+                  <div ref={sec2Ref} className="sec-flag"><span>S2</span><i className="sec-dot"></i></div>
+                  <div ref={sec3Ref} className="sec-flag"><span>S3</span><i className="sec-dot"></i></div>
+                </div>
               </div>
               <div ref={frameCounterRef} className="frame-index-counter">FRAME 001/{TOTAL_FRAMES}</div>
             </div>
+
           </div>
         </div>
       </div>
