@@ -14,7 +14,7 @@ export default function RulesAndGuidelines() {
           entry.target.classList.remove('in-view');
         }
       });
-    }, { threshold: 0.5, rootMargin: "-10% 0px -20% 0px" });
+    }, { threshold: 0.1, rootMargin: "-20% 0px -10% 0px" });
 
     const items = listRef.current?.querySelectorAll('.tire-bullet-item');
     items?.forEach(item => observer.observe(item));

@@ -769,15 +769,34 @@ body {
 }
 
 .faq-drawer {
-  display: none;
-  margin-top: 16px;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease, margin-top 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  margin-top: 0;
   color: var(--text-silver);
   font-size: 0.9375rem;
   line-height: 1.5;
 }
 
+.faq-drawer > p {
+  overflow: hidden;
+  margin: 0;
+}
+
 .faq-block.active .faq-drawer {
-  display: block;
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: 16px;
+}
+
+.faq-arrow {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.faq-block.active .faq-arrow {
+  transform: rotate(180deg);
+  color: #E10600;
 }
 
 /* Preloader */
@@ -1039,10 +1058,6 @@ body {
 .tire-bullet-item:hover,
 .tire-bullet-item.in-view {
   transform: translateY(-8px);
-}
-
-.tire-bullet-item:not(:last-child):hover,
-.tire-bullet-item:not(:last-child).in-view {
   border-left-color: #E10600;
   background: linear-gradient(90deg, rgba(225, 6, 0, 0.15) 0%, transparent 100%);
   box-shadow: -10px 0 20px -15px rgba(225, 6, 0, 0.5);
@@ -1055,8 +1070,8 @@ body {
   display: inline;
 }
 
-.tire-bullet-item:not(:last-child):hover strong,
-.tire-bullet-item:not(:last-child).in-view strong {
+.tire-bullet-item:hover strong,
+.tire-bullet-item.in-view strong {
   color: #E10600;
 }
 
