@@ -1022,48 +1022,51 @@ body {
 
 .tire-bullet-item {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 12px;
+  flex-direction: row;
+  align-items: flex-start;
+  text-align: left;
+  gap: 20px;
   font-size: 1.05rem;
   color: var(--text-silver);
   line-height: 1.6;
-  padding: 20px;
-  border-bottom: 4px solid transparent;
+  padding: 16px 20px;
+  border-left: 3px solid transparent;
   transition: all 0.3s ease;
-  border-radius: 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
 }
 
 .tire-bullet-item:hover,
 .tire-bullet-item.in-view {
-  border-bottom-color: #E10600;
-  background: linear-gradient(0deg, rgba(225, 6, 0, 0.15) 0%, transparent 100%);
   transform: translateY(-8px);
-  box-shadow: 0 10px 20px -10px rgba(225, 6, 0, 0.5);
+}
+
+.tire-bullet-item:not(:last-child):hover,
+.tire-bullet-item:not(:last-child).in-view {
+  border-left-color: #E10600;
+  background: linear-gradient(90deg, rgba(225, 6, 0, 0.15) 0%, transparent 100%);
+  box-shadow: -10px 0 20px -15px rgba(225, 6, 0, 0.5);
 }
 
 .tire-bullet-item strong {
   color: #FFFFFF;
   margin-right: 6px;
   transition: color 0.3s ease;
-  display: block;
-  margin-bottom: 4px;
+  display: inline;
 }
 
-.tire-bullet-item:hover strong,
-.tire-bullet-item.in-view strong {
+.tire-bullet-item:not(:last-child):hover strong,
+.tire-bullet-item:not(:last-child).in-view strong {
   color: #E10600;
 }
 
 .tire-icon {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   flex-shrink: 0;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cline x1='12' y1='2' x2='12' y2='8'/%3E%3Cline x1='12' y1='16' x2='12' y2='22'/%3E%3Cline x1='4.93' y1='4.93' x2='9.17' y2='9.17'/%3E%3Cline x1='14.83' y1='14.83' x2='19.07' y2='19.07'/%3E%3Cline x1='2' y1='12' x2='8' y2='12'/%3E%3Cline x1='16' y1='12' x2='22' y2='12'/%3E%3Cline x1='4.93' y1='19.07' x2='9.17' y2='14.83'/%3E%3Cline x1='14.83' y1='9.17' x2='19.07' y2='4.93'/%3E%3C/svg%3E");
   background-size: cover;
-  margin-bottom: 8px;
+  margin-top: 4px;
 }
 
 /* Force hide Next.js dev tools indicator */
@@ -1950,8 +1953,8 @@ nextjs-portal,
 
   .tire-bullet-item {
     font-size: 0.95rem;
-    padding: 12px 12px;
-    gap: 12px;
+    padding: 16px 12px;
+    gap: 16px;
   }
 
   /* FAQ */
