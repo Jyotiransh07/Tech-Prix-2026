@@ -23,7 +23,7 @@ export default function RulesAndGuidelines() {
   }, []);
   return (
     <section id="rules" className="content-section race-regulations" style={{ paddingTop: '40px', paddingBottom: '0px', marginBottom: '0px' }}>
-      <div className="f1-container max-w-[1200px] mx-auto px-4">
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 16px' }}>
         <div className="section-header-block text-center">
           <h2 className="section-title-large text-glitch reward-heading-glitch" data-text="RULES & GUIDELINES">RULES & GUIDELINES</h2>
           <p className="section-summary" style={{ margin: '24px auto 0 auto', textAlign: 'center' }}>
@@ -31,7 +31,7 @@ export default function RulesAndGuidelines() {
           </p>
         </div>
 
-        <div className="relative w-full max-w-[850px] mx-auto mt-8 md:mt-12">
+        <div className="relative w-full max-w-[1000px] mx-auto mt-8 md:mt-12" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
           {/* Rules Card */}
           <div className="rules-container spotlight-card w-full relative z-10 bg-black/80 backdrop-blur-sm">
             <ul ref={listRef} className="tire-list">

@@ -1043,24 +1043,24 @@ body {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  justify-content: flex-start;
   text-align: left;
   gap: 20px;
   font-size: 1.05rem;
   color: var(--text-silver);
   line-height: 1.6;
   padding: 16px 20px;
-  border-left: 3px solid transparent;
+  border-left: 4px solid transparent;
   transition: all 0.3s ease;
   border-radius: 4px;
-  margin-bottom: 8px;
 }
 
 .tire-bullet-item:hover,
 .tire-bullet-item.in-view {
-  transform: translateY(-8px);
   border-left-color: #E10600;
   background: linear-gradient(90deg, rgba(225, 6, 0, 0.15) 0%, transparent 100%);
-  box-shadow: -10px 0 20px -15px rgba(225, 6, 0, 0.5);
+  transform: translateX(8px);
+  box-shadow: -10px 0 20px -10px rgba(225, 6, 0, 0.5);
 }
 
 .tire-bullet-item strong {
@@ -2399,6 +2399,16 @@ nextjs-portal,
 
 .f1-timer-label.cyan {
   color: #00E5CC;
+}
+
+/* Desktop: show full label, hide short */
+.timer-label-mobile { display: none; }
+.timer-label-desktop { display: block; }
+
+/* Mobile: show short label, hide full */
+@media (max-width: 480px) {
+  .timer-label-mobile { display: block; }
+  .timer-label-desktop { display: none; }
 }
 
 .f1-timer-colon-box {

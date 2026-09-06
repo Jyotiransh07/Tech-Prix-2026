@@ -76,11 +76,11 @@ export default function ExecutiveBriefing() {
             <div className="f1-timer-wrapper">
               <h3 className="f1-timer-header">Registrations Closing In</h3>
               <div className="f1-timer-row">
-                
+
                 {/* Days */}
                 <div className="f1-timer-box">
                   <span className="f1-timer-num">{String(timeLeft.days).padStart(2, '0')}</span>
-                  <span className="f1-timer-label">DAYS</span>
+                  <span className="f1-timer-label">DAY(S)</span>
                 </div>
 
                 {/* Separator */}
@@ -92,7 +92,7 @@ export default function ExecutiveBriefing() {
                 {/* Hours */}
                 <div className="f1-timer-box">
                   <span className="f1-timer-num">{String(timeLeft.hours).padStart(2, '0')}</span>
-                  <span className="f1-timer-label">HOURS</span>
+                  <span className="f1-timer-label">HOUR(S)</span>
                 </div>
 
                 {/* Separator */}
@@ -104,7 +104,8 @@ export default function ExecutiveBriefing() {
                 {/* Minutes */}
                 <div className="f1-timer-box">
                   <span className="f1-timer-num cyan">{String(timeLeft.minutes).padStart(2, '0')}</span>
-                  <span className="f1-timer-label cyan">MINUTES</span>
+                  <span className="f1-timer-label cyan timer-label-desktop">MINUTE(S)</span>
+                  <span className="f1-timer-label cyan timer-label-mobile">MIN(S)</span>
                 </div>
 
                 {/* Separator */}
@@ -116,9 +117,10 @@ export default function ExecutiveBriefing() {
                 {/* Seconds */}
                 <div className="f1-timer-box">
                   <span className="f1-timer-num cyan">{String(timeLeft.seconds).padStart(2, '0')}</span>
-                  <span className="f1-timer-label cyan">SECONDS</span>
+                  <span className="f1-timer-label cyan timer-label-desktop">SECOND(S)</span>
+                  <span className="f1-timer-label cyan timer-label-mobile">SEC(S)</span>
                 </div>
-                
+
               </div>
             </div>
           </div>
