@@ -34,8 +34,86 @@ export default function ExecutiveBriefing() {
   }, []);
 
   return (
-    <section id="about" className="content-section about-section-new" style={{ scrollMarginTop: '0px', paddingTop: '120px' }}>
+    <section id="about" className="content-section about-section-new" style={{ scrollMarginTop: '0px', paddingTop: '40px' }}>
       <div className="f1-container max-w-1200">
+
+        {/* Sponsor Logos */}
+        <div className="sponsors-section" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '40px' }}>
+          <span className="f1-timer-header" style={{ marginBottom: '16px' }}>SPONSORSHIPS</span>
+          <style>{`
+            @keyframes scrollLogos {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .sponsors-marquee-wrapper {
+              overflow: hidden;
+              width: 100%;
+              position: relative;
+              padding: 10px 0;
+              /* Optional: fade edges */
+              -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+              mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            }
+            .sponsors-marquee-track {
+              display: flex;
+              width: max-content;
+              animation: scrollLogos 50s linear infinite;
+            }
+            @media (hover: hover) {
+              .sponsors-marquee-track:hover {
+                animation-play-state: paused;
+              }
+            }
+            .sponsors-marquee-content {
+              display: flex;
+              align-items: center;
+              gap: 50px;
+              padding-right: 50px;
+            }
+            .sponsor-logo-img {
+              width: 90px;
+              object-fit: contain;
+              border-radius: 6px;
+              opacity: 0.85;
+            }
+            @media (min-width: 1024px) {
+              .sponsors-marquee-track {
+                animation-duration: 35s;
+              }
+              .sponsors-marquee-content {
+                gap: 120px;
+                padding-right: 120px;
+              }
+              .sponsor-logo-img {
+                width: 120px;
+              }
+            }
+          `}</style>
+          <div className="sponsors-marquee-wrapper">
+            <div className="sponsors-marquee-track">
+              {/* First Half */}
+              <div className="sponsors-marquee-content">
+                {[...Array(4)].map((_, i) => (
+                  <div key={`g1-${i}`} style={{ display: 'contents' }}>
+                    <img src="/logos/BINA.jpeg" alt="BINA" className="sponsor-logo-img" />
+                    <img src="/logos/MumbaiTech.jpeg" alt="Mumbai Tech Community" className="sponsor-logo-img" />
+                    <img src="/logos/PrePark.jpeg" alt="PrePark" className="sponsor-logo-img" />
+                  </div>
+                ))}
+              </div>
+              {/* Second Half (Duplicate for seamless loop) */}
+              <div className="sponsors-marquee-content" aria-hidden="true">
+                {[...Array(4)].map((_, i) => (
+                  <div key={`g2-${i}`} style={{ display: 'contents' }}>
+                    <img src="/logos/BINA.jpeg" alt="BINA" className="sponsor-logo-img" />
+                    <img src="/logos/MumbaiTech.jpeg" alt="Mumbai Tech Community" className="sponsor-logo-img" />
+                    <img src="/logos/PrePark.jpeg" alt="PrePark" className="sponsor-logo-img" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Top Stats Bar */}
         <div className="about-stats-bar">
