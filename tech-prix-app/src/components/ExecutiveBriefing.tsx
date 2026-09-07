@@ -11,8 +11,8 @@ export default function ExecutiveBriefing() {
   });
 
   useEffect(() => {
-    // 8th sept 2026 15:00:00
-    const targetDate = new Date('2026-09-08T15:00:00').getTime();
+    // 9th sept 2026 09:00:00
+    const targetDate = new Date('2026-09-09T09:00:00').getTime();
 
     const interval = setInterval(() => {
       const now = new Date().getTime();
