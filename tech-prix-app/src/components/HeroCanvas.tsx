@@ -229,23 +229,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
                 </button>
               </div>
 
-              {/* Mobile-only sponsor logos (desktop uses HUD bottom-right) */}
-              <div className="mobile-sponsors">
-                <NextImage
-                  src="/logos/BINA.jpeg"
-                  alt="BINA"
-                  width={120}
-                  height={60}
-                  style={{ objectFit: "contain", borderRadius: "6px", opacity: 0.85 }}
-                />
-                <NextImage
-                  src="/logos/PrePark.jpeg"
-                  alt="PrePark"
-                  width={120}
-                  height={60}
-                  style={{ objectFit: "contain", borderRadius: "6px", opacity: 0.85 }}
-                />
-              </div>
+
             </div>
 
 
@@ -309,23 +293,7 @@ export default function HeroCanvas({ onOpenModal }: { onOpenModal: (mode: string
             {/* Sector & Frame Counter + Sponsors */}
             <div className="instrument-card instrument-sectors" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: 0 }}>
               <div className="sector-flags-row">
-                {/* Sponsor logos inline left of sector flags */}
-                <div className="hud-sponsors-logos" style={{ gap: '30px', marginRight: '24px' }}>
-                  <NextImage
-                    src="/logos/BINA.jpeg"
-                    alt="BINA"
-                    width={90}
-                    height={90}
-                    style={{ objectFit: "contain", borderRadius: "4px", opacity: 0.85 }}
-                  />
-                  <NextImage
-                    src="/logos/PrePark.jpeg"
-                    alt="PrePark"
-                    width={90}
-                    height={90}
-                    style={{ objectFit: "contain", borderRadius: "4px", opacity: 0.85 }}
-                  />
-                </div>
+
                 <div className="sector-flags">
                   <div ref={sec1Ref} className="sec-flag active"><span>S1</span><i className="sec-dot"></i></div>
                   <div ref={sec2Ref} className="sec-flag"><span>S2</span><i className="sec-dot"></i></div>
