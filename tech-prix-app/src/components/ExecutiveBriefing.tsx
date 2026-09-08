@@ -59,11 +59,7 @@ export default function ExecutiveBriefing() {
               width: max-content;
               animation: scrollLogos 50s linear infinite;
             }
-            @media (hover: hover) {
-              .sponsors-marquee-track:hover {
-                animation-play-state: paused;
-              }
-            }
+
             .sponsors-marquee-content {
               display: flex;
               align-items: center;
@@ -96,7 +92,7 @@ export default function ExecutiveBriefing() {
                 {[...Array(4)].map((_, i) => (
                   <div key={`g1-${i}`} style={{ display: 'contents' }}>
                     <img src="/logos/BINA.jpeg" alt="BINA" className="sponsor-logo-img" />
-                    <img src="/logos/MumbaiTech.jpeg" alt="Mumbai Tech Community" className="sponsor-logo-img" />
+                    <img src="/logos/EliteForums.jpeg" alt="Elite Forums" className="sponsor-logo-img" />
                     <img src="/logos/PrePark.jpeg" alt="PrePark" className="sponsor-logo-img" />
                   </div>
                 ))}
@@ -106,7 +102,7 @@ export default function ExecutiveBriefing() {
                 {[...Array(4)].map((_, i) => (
                   <div key={`g2-${i}`} style={{ display: 'contents' }}>
                     <img src="/logos/BINA.jpeg" alt="BINA" className="sponsor-logo-img" />
-                    <img src="/logos/MumbaiTech.jpeg" alt="Mumbai Tech Community" className="sponsor-logo-img" />
+                    <img src="/logos/EliteForums.jpeg" alt="Elite Forums" className="sponsor-logo-img" />
                     <img src="/logos/PrePark.jpeg" alt="PrePark" className="sponsor-logo-img" />
                   </div>
                 ))}
